@@ -1,0 +1,7 @@
+# Plots were obtained with tgraph:
+
+# data is mostly from 
+https://cdiac.ess-dive.lbl.gov/trends/co2/ice_core_co2.html
+
+# CO2-graphs made with
+tgraph.py -v 180:450 -x -420000:2030 -t SECTION -c 3:4 vostok.icecore.co2.txt -c 2:3 law2006.txt -c 2:3 siple2.013.txt -c 4:5 co2_weekly_mlo.txt -m

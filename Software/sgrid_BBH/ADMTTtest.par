@@ -1,0 +1,70 @@
+# unsolved ADMTT data
+
+physics = ADMvars RealisticBBH
+
+# physical parameters
+RealisticBBH_initial_time = 0
+RealisticBBH_initial_phase = 0
+RealisticBBH_m1	= 0.7
+RealisticBBH_m2	= 0.3
+RealisticBBH_d  = 10
+
+# excision regions: b ~ half distance, r1=m1*Fac1, r2=m2*Fac2
+RealisticBBH_b  = 4.9959983987
+RealisticBBH_excisionFac1 = 0.4
+RealisticBBH_excisionFac2 = 0.4
+
+# type of data
+RealisticBBH_freeData = ADMTT_2PN_full # ADMTT_2PN_near
+RealisticBBH_projection = puncCTT # no
+RealisticBBH_undo_conformal_split = no
+
+
+###################
+# grid
+###################
+nboxes = 2
+n1 = 14
+n2 = 14
+n3 = 8
+
+iterations = 0
+
+
+###################
+# elliptic solver
+###################
+RealisticBBH_Solver = none # Newton
+RealisticBBH_itmax = 1000
+
+# RealisticBBH does not uses bfaces
+Coordinates_set_bfaces = no
+
+
+###################
+# output
+###################
+checkpoint = yes
+checkpoint_variables = all
+checkpoint_restart_it = 0
+
+#0doutiter = 1
+#0doutput = ham momx RealisticBBH_U_Err RealisticBBH_Wx_Err
+#0doutputall = yes
+#0doutput_VolumeIntegralJacobian = one
+
+1doutiter = 1
+1doutput = gxx Kxx alpha betax # RealisticBBH_U RealisticBBH_Wx ham momx RealisticBBH_U_Err RealisticBBH_Wx_Err RealisticBBH_ARxx RealisticBBH_trK RealisticBBH_ABYxx RealisticBBH_DivABYx RealisticBBH_Laplacepsi RealisticBBH_gxx psi dpsiopsix ddpsiopsixx RealisticBBH_Tret1 RealisticBBH_psi_bak
+1doutputall = yes
+
+#2doutiter = 1
+#2doutput = gxx Kxx alpha betax # RealisticBBH_U RealisticBBH_Wx ham momx RealisticBBH_U_Err RealisticBBH_Wx_Err RealisticBBH_ARxx RealisticBBH_trK RealisticBBH_ABYxx RealisticBBH_DivABYx RealisticBBH_Laplacepsi RealisticBBH_gxx psi dpsiopsix ddpsiopsixx RealisticBBH_Tret1 RealisticBBH_Tret2 RealisticBBH_hTTj_xx RealisticBBH_hTTp_xx RealisticBBH_hTTr_xx RealisticBBH_hTTi_xx RealisticBBH_hTTf_xx RealisticBBH_hTTdotp_xx RealisticBBH_hTTdotr_xx RealisticBBH_hTTdoti_xx RealisticBBH_pntempxx RealisticBBH_psi_bak
+#2doutputall = yes
+
+outputReplaceXby_box0 = x
+outputReplaceYby_box0 = y
+outputReplaceZby_box0 = z
+
+outputReplaceXby_box1 = x
+outputReplaceYby_box1 = y
+outputReplaceZby_box1 = z

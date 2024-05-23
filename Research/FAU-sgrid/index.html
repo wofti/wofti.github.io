@@ -1,0 +1,149 @@
+<HTML>
+<HEAD>
+<TITLE>About Sgrid and the FAU repos</TITLE>
+</HEAD>
+
+<!--
+<BODY BGCOLOR="#C0C0C0" TEXT="#000000">
+-->
+<BODY BGCOLOR="#000000" TEXT="#bba400"
+link="ccddff" vlink="cc0000" alink="ffffff">
+
+
+<A HREF="../../index.html"><H1>Wolfgang Tichy</H1> </A>
+
+<HR>
+<H2>Obtaining Sgrid</H2>
+
+To get the
+<A HREF="https://github.com/sgridsource">Sgrid source code</A>
+type:
+<PRE>
+git clone https://github.com/sgridsource/sgrid.git
+</PRE>
+Copy the file <A HREF="MyConfig">MyConfig</A> into the newly created sgrid
+directory.
+
+<P>
+Type:
+<PRE>
+cd sgrid
+make git_clone
+</PRE>
+
+
+
+<HR>
+<H2>Getting and compiling the TEMPLATES library needed for sgrid</H2>
+
+Type:
+<PRE>
+git clone https://github.com/wofti/Packages.git
+</PRE>
+
+<P>
+Type:
+<PRE>
+cd Packages/dctemplates_extBlasLapack
+make
+</PRE>
+
+
+<HR>
+<H2>Compiling Sgrid</H2>
+
+To compile you need a file called <A HREF="MyConfig">MyConfig</A>.
+In it you need to set a few things like the compiler you use or where
+certain libraries are located. The file linked here is an example that
+works on Debian 11.
+Among other things it has the section:
+<PRE>
+DFLAGS += -DUMFPACK
+SPECIALINCS += -I/usr/include/suitesparse
+SPECIALLIBS += -lumfpack -lamd -lblas
+</PRE>
+<P>
+The DFLAGS line says that we want to use the UMFPACK 
+library. The SPECIALLIBS lines after that simply describe what
+libraries we want to compile in for that. Of course this only works if they
+are actually installed. To install them either download
+<A HREF="https://github.com/DrTimothyAldenDavis/SuiteSparse/releases">
+SuiteSparse</A>
+yourself, or if you are e.g. on Debian Linux just install
+the package libsuitesparse-dev.
+<P>
+
+There is also the section:
+<PRE>
+DFLAGS += -DTEMPLATES
+TEMPLATESDIR = /home/wolf/Packages/dctemplates_extBlasLapack
+SPECIALLIBS += -L$(TEMPLATESDIR) -literatortemplates
+SPECIALLIBS += -lblas -llapack
+</PRE>
+
+The DFLAGS line says that we want to use the TEMPLATES library. The lines
+after that describe where this library is, and what libraries we want to
+compile in. The TEMPLATES library needs to be first downloaded, and then
+compiled (see above).
+<P>
+
+Similary we need the GSL library:
+<PRE>
+DFLAGS += -DGSL
+SPECIALLIBS += -lgsl -lgslcblas
+</PRE>
+<P>
+
+
+In order to make new initial data for binary neutron stars we need the GSL
+and both UMFPACK and TEMPLATES. In this case the lapack and blas libraries
+also need to be installed. But if we just need to read in already created
+data with e.g. the data reader in BAM, Cactus or Nmesh all these lines can
+be commented out, because none of these libraries are needed.
+
+<P>
+
+There are now 2 versions of neutron star initial data in Sgrid.
+The old private one is called BNSdata and the new public one DNSdata. 
+The new DNSdata can create higher mass and spin configurations, and
+may also run faster. So it should be preferred. Note that DNSdata also
+requires the project EoS_T0.
+
+<P>
+
+
+
+<HR>
+<H2>Parameter files for Sgrid</H2>
+<!--
+Several example parfiles are in
+<A HREF="../EccRed/sgrid-parfiles">../EccRed/sgrid-parfiles</A>.
+Not all of these are for binaries and thus useful for eccentricity
+reduction. The parfiles are described in
+<A HREF="../EccRed/sgrid-parfiles/Note.txt">../EccRed/sgrid-parfiles/Note.txt</A>.
+-->
+Several example parfiles are in
+sgrid/src/Projects/DNSdata/ParFiles , with description (to some extent) in
+sgrid/src/Projects/DNSdata/ParFiles/Note.txt .
+
+
+<HR>
+<H2>Running Sgrid and BAM</H2>
+
+Sgrid only uses OpenMP, not MPI, so do not run it with mpirun. Just launch
+it on a machine with multiple CPU cores.
+
+On Koko, Sgrid and also BAM can also be started with the 
+<A HREF="https://github.com/wofti/WTscripts/blob/main/submitjob">submitjob</A>
+script found at
+<A HREF="https://github.com/wofti/WTscripts">https://github.com/wofti/WTscripts</A>.
+For slurm you als need 
+<A HREF="https://github.com/wofti/WTscripts/blob/main/slurm_mpirun_script">slurm_mpirun_script</A>.
+
+
+<HR>
+<H2>About the non-public git repos of the FAU NR group</H2>
+
+Some Sgrid projects that are still under development reside in the
+non-public
+<A HREF="../../Software/FAU_NR_RepoAccess.html">FAU NR git repos</A>.

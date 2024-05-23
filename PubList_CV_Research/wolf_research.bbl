@@ -1,0 +1,63 @@
+\begin{thebibliography}{1}
+
+\bibitem{Tichy02}
+W.~Tichy, B.~Br\"ugmann, M.~Campanelli, and P.~Diener.
+\newblock Binary black hole initial data for numerical general relativity based
+  on post-{N}ewtonian data.
+\newblock {\em Phys. Rev. D}, 67:064008, 2003.
+\newblock gr-qc/0207011.
+
+\bibitem{Tichy03a}
+W.~Tichy, B.~Br\"ugmann, and P.~Laguna.
+\newblock Gauge conditions for binary black hole puncture data based on an
+  approximate helical {K}illing vector.
+\newblock {\em Phys. Rev. D}, 68:064008, 2003.
+\newblock gr-qc/0306020.
+
+\bibitem{Tichy:2003qi}
+Wolfgang Tichy and Bernd Br{\"u}gmann.
+\newblock Quasi-equilibrium binary black hole sequences for puncture data
+  derived from helical {K}illing vector conditions.
+\newblock 2003.
+\newblock gr-qc/0307027, accepted for publication by Phys. Rev. D.
+
+\bibitem{Jansen03}
+Nina Jansen, Bernd Bruegmann, and Wolfgang Tichy.
+\newblock Numerical stability of the {AA} evolution system compared to the
+  {ADM} and {BSSN} systems.
+\newblock 2003.
+\newblock gr-qc/0310100.
+
+\bibitem{Tichy04}
+Wolfgang Tichy and Bernd Br{\"u}gmann.
+\newblock Properties of a new strongly hyperbolic first order version of the
+  bssn system.
+\newblock 2003.
+\newblock in preparation.
+
+\bibitem{Tichy03}
+W.~Tichy and \'E.~\'E. Flanagan.
+\newblock Coordinate independent formulation of post-1-newtonian approximation
+  to general relativity.
+\newblock 2003.
+\newblock in preparation.
+
+\bibitem{Tichy:1999pv}
+Wolfgang Tichy, Eanna~E. Flanagan, and Eric Poisson.
+\newblock Can the post-newtonian gravitational waveform of an inspiraling
+  binary be improved by solving the energy balance equation numerically?
+\newblock {\em Phys. Rev.}, D61:104015, 2000.
+
+\bibitem{Tichy00b}
+W.~Tichy and \'E.~\'E. Flanagan.
+\newblock Angular momentum ambiguities in asymptotically flat spacetimes which
+  are perturbations of stationary spacetimes.
+\newblock {\em Class. Quant. Grav.}, 18:3395, 2001.
+
+\bibitem{Tichy:1998ws}
+Wolfgang Tichy and Eanna~E. Flanagan.
+\newblock How unique is the expected stress energy tensor of a massive scalar
+  field?
+\newblock {\em Phys. Rev.}, D58:124007, 1998.
+
+\end{thebibliography}

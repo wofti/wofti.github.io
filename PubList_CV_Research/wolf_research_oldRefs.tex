@@ -1,0 +1,739 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Note: {Tichy_pn} has to be changed
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[11pt]{article}
+
+%\hfuzz 10pt
+%\font\bigbf=cmb10 scaled\magstep2
+%\font\smaller=cmr9
+
+
+% From Phil
+\setlength{\textwidth}{7in}
+\setlength{\textheight}{9.0in}
+\setlength{\hoffset}{-0.275in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\topmargin}{0in}
+\setlength{\voffset}{0.5in}  % for RHAT 6.2 latex  
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+
+
+\begin{document}
+
+\centerline{\bf \large Wolfgang Tichy's Research Interests}
+\bigskip
+
+
+My research interests span a broad range of topics including
+projects in 
+numerical relativity (\S 1),
+post-Newtonian theory (\S 2),
+gravitational waves (\S 3),
+semiclassical relativity (\S 4).
+% Although I have several ideas for future
+% research in these same topics, I also eagerly look forward to working in
+% new, and perhaps different, areas of research in General Relativity,
+% theoretical astrophysics, cosmology and/or numerical relativity.
+I have several ideas for future research in all these topics.
+Yet at the moment most of my research is in the area of numerical relativity.
+
+
+\medskip
+
+
+\bigskip 
+\bigskip 
+\noindent
+{\bf 1. Numerical Relativity}
+
+\bigskip 
+\noindent
+{\it a. Post-Newtonian initial data for black hole mergers}
+\medskip
+
+Mergers of two black holes both with masses of 
+$\sim 10-100M_{\odot}$ will be
+observable by the ground based gravitational wave detectors. 
+These systems are highly relativistic once they enter the sensitive 
+frequency band ($\sim 50 - 200 \, {\rm Hz}$) of the detector. Hence
+in order to predict their orbits and waveforms, fully nonlinear numerical
+simulations should be used instead of standard post-Newtonian calculations.
+Of course such numerical simulations must begin by specifying initial data
+and the whole simulation will only be astrophysically relevant if
+astrophysically realistic initial data are used.
+Now, in general relativity the initial data must fulfill constraint equations,
+so that only part of the data are freely specifiable, the rest is then
+determined by solving the constraint 
+equations (for a review see e.g. \cite{Cook_LivRev}). 
+A lot of the work in constructing initial data has focused on 
+approaches that pick the freely specifiable part of the data, with the aim
+of simplifying the constraint equations, rather
+than picking astrophysically realistic initial data 
+(see e.g. \cite{Bowen_York,Cook_EffecPot}).
+It is therefore important to construct initial data, which accurately
+represent astrophysical systems 
+such as two black holes orbiting each other.
+
+Together with Bernd Bruegmann, Manuela Campanelli and Peter Diener,
+I am working on a project to generate initial data
+for two inspiraling black holes from post-Newtonian expressions. 
+The idea is that even though post-Newtonian theory may not be able to evolve
+two black holes when they get close, it can still provide initial
+data for fully nonlinear numerical simulations when we start
+at a separation where post-Newtonian theory is valid.
+Hence we needed expressions for the 3-metric and
+extrinsic curvature in a convenient gauge. 
+We decided to use post-Newtonian expressions computed in the ADM gauge
+by P. Jaranowski and G. Sch\"afer \cite{Jara_Schafer}, who were
+so kind to send us their expressions in a Mathematica file.
+We use their expressions for the 3-metric and conjugate momentum,
+up to post-Newtonian order $ (v/c)^5 $.
+The ADM gauge has at least four advantages:
+(i) we can easily find
+expressions for 3-metric and extrinsic curvature,
+(ii) unlike in the harmonic gauge no logarithmic divergences appear, 
+(iii) up to $(v/c)^3$ the data can be written in puncture form
+\cite{Punc}, which simplifies calculations, and
+(iv) the trace of the extrinsic curvature vanishes up to order $(v/c)^6$,
+so that we can set it to zero (if we go only up to order $ (v/c)^5$),
+which can be used to decouple the Hamiltonian 
+constraint equation from the momentum constraint equations.
+In the ADM gauge the 3-metric is conformally flat up to order $ (v/c)^3$,
+at order $ (v/c)^4$ deviations from conformal flatness enter. 
+The extrinsic curvature up to order $ (v/c)^3$ is simply of 
+Bowen-York form \cite{Bowen_York}, with correction terms of order $ (v/c)^5$.
+
+One problem is that post-Newtonian theory in principle deals with point
+particles and not black holes, and that the post-Newtonian data
+are not valid near each particle. 
+To overcome this problem we rewrite the post-Newtonian data
+such that each post-Newtonian point particle is replaced by a 
+puncture \cite{Punc}
+coordinate singlarity. This amounts to adding post-Newtonian terms
+that are higher than $(v/c)^5$. As we are intersted in a post-Newtonian
+accuracy of only $(v/c)^5$, this replacement does not change the data
+as far as post-Newtonian theory up to $(v/c)^5$ is concerned.
+The advantage however is that then the data look like Schwarzschild
+black holes plus a perturbation near each particle. Furthermore the data
+then closely resemble puncture data, which is advantageous in numerical
+calculations.
+
+Another problem with the post-Newtonian data is that the expressions for
+the 3-metric and extrinsic curvature do not fulfill the constraint equations.
+We therefore use the York-Lichnerowicz conformal 
+decomposition \cite{York_Decomp} with the
+post-Newtonian data used as the freely specifiable data 
+and numerically solve for a new conformal factor $\Psi$ 
+and the usual correction to the extrinsic curvature,
+coming from a vector potential. The new extrinsic curvature and the 3-metric
+multiplied by $\Psi^4$ are then guaranteed to fulfill the constraints.
+The biggest numerical problem in this approach is to find a numerical scheme
+which can deal with the divergences in the post-Newtonian data
+at the center of each black hole. However as the data are very similar to
+puncture data, we can conformally rescale the post-Newtonian data by
+appropriate powers of the post-Newtonian conformal factor $\psi_{PN}$
+to obtain a well behaved 3-metric. If we then make the Ansatz that
+the new conformal factor $\Psi$ is the post-Newtonian
+conformal factor $\psi_{PN}$ plus a finite correction $u$,
+we arrive at elliptic equations which can be solved numerically.
+
+The question then arises how realistic the corrected constraint fulfilling
+data are.  One obvious problem is that we have changed the post-Newtonian
+data in order to satisfy the constraints. Moreover since we solve elliptic
+equations this modification is non-local, i.e. the large errors in the data
+before the elliptic solve near the black holes will change the solution
+everywhere, even in regions where the constraints are well satisfied before
+the elliptic solve. In turns out that this change is on the same order of
+magnitude as the highest post-Newtonian terms we have included, so that
+after enforcing the constraints we have likely lost some of the
+post-Newtonian characteristics, which makes the data appealing in the first
+place. In particular the ADM and apparent horzon masses of the data always
+increase due to the elliptic solve. We have however 
+found a way to compensate for this increase by decreasing the post-Newtonian 
+conformal factor $\psi_{PN}$ before the solve 
+by a term of order $ (v/c)^4$ \cite{Tichy_PNdata}.
+The result of this modification is that after the elliptic solve, the data
+have the same ADM and apparent horzon masses as the pure post-Newtonian
+data. In addition the difference between pure and solved data 
+in the region where post-Newtonian theory is valid,
+is now smaller than the highest post-Newtonian corrections included. Hence
+we can find constraint satisfying data, which incorporate post-Newtonian
+features.
+
+\bigskip   
+\noindent
+{ \it Future outlook}
+\medskip
+
+The next step is to check by how much the initial data differ from a tidally
+deformed black hole in the region near each the horizon.
+Furthermore I would like to compare our data with initial data from the 
+puncture approach and check the influence of the
+non-conformally flat post-Newtonian terms, after all 
+up to order $(v/c)^3$ our data are equal to puncture data.
+After all these checks I want to 
+use our data as the starting point for numerical evolutions and see
+what waveforms we get. 
+
+
+
+
+\bigskip
+\noindent
+{\it b. Hyperbolic formulations of Einstein's equations 
+for black hole evolutions}
+\medskip
+
+
+\bigskip
+\noindent
+{\it c. Gauge conditions for binary black hole
+puncture data based on an approximate helical Killing vector}
+\medskip                          
+
+
+
+
+
+
+
+\bigskip
+\bigskip
+\noindent
+{\bf 2. Post-Newtonian theory}
+
+\bigskip
+\noindent
+{\it Coordinate independent formulation of post-1-Newtonian theory } 
+\medskip
+
+In many problems
+of interest in astrophysics it is
+difficult or impossible to solve the full Einstein equations
+of General Relativity analytically. For this reason the so called
+post-Newtonian approximation has been 
+developed \cite{Chandra,Chandra_cons,Chandra2PN}.
+Usually, the equations of post-Newtonian Theory are given in
+a specific coordinate system (or gauge). 
+The gauge is chosen such that it simplifies the equations. For
+example the coordinates are usually
+chosen to be as closely Cartesian as possible.
+The three most often used gauges (see e.g. \cite{Damour}) are: 
+the harmonic gauge, the standard post-Newtonian gauge, and 
+the conformally Cartesian gauge.
+In each of these gauges the post-Newtonian equations take a different form.
+This plethora of different gauges
+has several disadvantages.
+Often it is difficult to see if two calculations agree, simply because
+they are done in different coordinate systems.
+Even though there are several standard choices for the coordinates (e.g.
+the harmonic gauge, the standard gauge, ...), it is sometimes better
+to use different coordinates, which are better 
+adapted to the problem at hand. 
+
+In 1998 Professor \'E. Flanagan and I started investigating the possibility of
+a gauge independent formulation of post-Newtonian General 
+Relativity \cite{Tichy_pn}.  
+We expanded the
+metric and connection of General Relativity in terms of a formal parameter
+$\epsilon \sim v/c$. 
+The expansion coefficients at each order in
+$\epsilon$ are coordinate independent tensor fields.  
+We followed
+earlier work by Dautcourt \cite{Dautcourt0,Dautcourt}, who 
+derived the coordinate independent form of Newtonian gravity
+(called Newton-Cartan theory).
+
+The only assumptions we need to make in our expansions are 
+(i) that the upper index metric starts at order $\epsilon^0$,
+(ii) that it has signature $(0+++)$ at leading order
+and (iii) that the contravariant
+stress-energy tensor describing matter starts at 
+order $\epsilon^4$.
+Inserting these expansions into the standard equations of General Relativity
+then yields two sets of equations.
+At order $\epsilon^0 $ we were able to recover the Newton-Cartan
+geometric formulation of Newtonian gravity, while
+at order $\epsilon^2 $ we found the first post-Newtonian
+corrections to Newton-Cartan Theory \cite{Tichy_pn}.
+If the resulting equations are considered as the fundamental
+equations of post-Newtonian theory, one finds
+that the theory possesses a symmetric connection, but no spacetime metric
+and that it is formulated solely in terms of geometric objects.
+Its connection has Newtonian and post-Newtonian pieces,
+which contain the dynamical degrees of freedom.
+As in the Newton-Cartan case, the theory allows for a scalar function,
+which can be interpreted as time.
+% Furthermore the theory allows for a scalar function, which we 
+% interpret as time.
+We were then able to show from our equations 
+that the usual coordinate-dependent equations of post-Newtonian gravity 
+can be recovered when one specializes to asymptotically flat situations
+and to appropriate classes of coordinates.
+
+
+
+\bigskip
+\noindent
+{ \it Future outlook }  
+\medskip
+
+
+
+It should be possible to find higher than just
+post-1-Newtonian corrections by expanding General Relativity to
+higher orders in the formal parameter $\epsilon$. 
+Also, it would be interesting to find fully covariant definitions of the
+quantities that are conserved (e.g. energy and angular momentum) at
+post-1-Newtonian order. 
+In the
+usual coordinate formulation of post-Newtonian theory conserved quantities
+are defined as volume or surface integrals over suitable stress-energy
+tensors. The problem is that our theory does not posses a metric, so that
+one encounters difficulties in defining volume integrals, since no natural
+volume element is available. One way around this could be to find exact
+3-forms and to use Stokes' law to find conserved integrals.  Such 3-forms
+might be constructed from the stress-energy tensor and approximate Killing
+vectors. Another possible route for finding conserved quantities might be
+to introduce a $3+1$ split in the theory and use the resulting
+spatial metric to define volume integrals. Such a $3+1$ 
+formulation is easily achieved since we
+already have a preferred time function available.
+
+
+\bigskip
+\bigskip
+\noindent
+{\bf 3. Gravitational Waves}
+
+ 
+\bigskip
+\noindent
+{a. \it Post-Newtonian gravitational waveforms  }
+
+\medskip
+
+The inspiral and merger of compact binaries is thought to be an important
+source of gravitational waves which could be detected by the LIGO, VIRGO 
+or GEO detectors. 
+The detection of gravitational waves from such an inspiral
+using matched filtering depends crucially on the availability of
+accurate template waveforms. 
+In the case of a nearly circular inspiral of two point masses the expected
+gravitational wave signal has the form of a chirp, i.e., a roughly
+sinusoidal signal with gradually increasing amplitude and frequency.
+If such a signal is to be detected by matched filtering,
+high accuracy is needed in the templates, in particular the phase of the
+template must closely match the phase of the actual signal.
+Such inspiral templates of the waveform and its phase have been 
+calculated up to 
+2.5 post-Newtonian order \cite{Blan-I-Will-Wis,Blanchet}.
+The phase is derived from the energy balance equation
+which basically states that the energy loss rate 
+is equal to the gravitational wave luminosity of the binary.
+
+\'E. Flanagan, E. Poisson and I \cite{Tichy_gwnum}
+have investigated if the accuracy of the templates' phasing can be
+improved by solving the post-Newtonian energy balance equation exactly
+numerically, rather than (as is normally done) solving the energy balance
+equation analytically within the post-Newtonian perturbative expansion.
+By specializing to the limit of a small mass ratio, we found evidence that
+there is no gain in accuracy. This result is disappointing, but constitutes
+useful information from the point of view of generating template banks for
+inspiral searches: there is no motivation in terms of increased event rate
+to solve numerically for the wave's phasing.
+
+
+
+
+\bigskip
+\noindent
+{b. \it Work in progress on computing the radiation reaction force
+        for point particles in Kerr spacetime}
+\medskip
+
+The inspiral of compact objects of $1-10M_{\odot}$ 
+into supermassive black holes of $\sim 10^{6}M_{\odot}$ is an
+important source of gravitational waves which could be detected by the
+planned space-based LISA detector \cite{Finn_Thorne}.
+Such systems go through roughly $10^{5}$ orbital cycles while they are in
+LISA's sensitive frequency band of $\sim 10^{-3}-1$ Hz. Hence, 
+in order to find accurate gravitational wave templates, we
+need to compute the inspiral orbit to high accuracy (of order $10^{-5}$).
+Since the mass ratio is small,
+the compact object is well
+approximated by a test-particle.
+Now, in order to find the orbit of a test-particle spiraling into a 
+black hole, one in principle has to compute the radiation reaction
+force. Yet, even though an analytic
+formula for the radiation reaction force has been given
+-\cite{Mino_Sasaki,Quinn_Wald}, it has been impossible so far 
+to evaluate it in practice in Kerr spacetime due
+to the presence of tail terms. 
+For this reason we focus on a method involving conservation laws and
+make use of the fact that the radiation reaction
+timescale is large compared to the dynamical timescale, if the mass ratio is  
+small. 
+In this case the test-particle orbit can be approximated as a sequence
+of geodesic orbits, where the constants of the motion
+describing a geodesic slowly change on a radiation reaction timescale. This
+approach has already been successfully implemented for general orbits around
+Schwarzschild black holes, equatorial orbits around Kerr
+black holes \cite{Kennefick}, 
+and also for inclined circular orbits around Kerr
+black holes \cite{Hughes}. Yet, in the astrophysically relevant case of
+generic inspiral orbits around rotating (Kerr) black holes, there is a
+problem. It is not yet known how to compute the adiabatic evolution of the
+Carter constant $C$ due to radiation reaction. On the other hand, the
+evolution of the
+particle's energy $E$ and $z$-component of angular momentum $L_z$,  can be
+computed from the energy and $z$-component of angular momentum fluxes carried
+by the gravitational waves to null infinity and down the black hole horizon.
+
+
+
+In 2000 Professor \'E. Flanagan 
+and I have started exploring the feasibility of
+possible methods for computing the evolution of the Carter constant.
+We first investigated a particular approach which was suggested
+several years ago by Sam Finn and more recently by John Friedman.
+It involves computing the $x$-
+and $y$-components of angular momentum
+$J_x$ and $J_y$ at future null infinity.             	 
+The approach envisages (i) computing for a given geodesic orbit the flux of
+$J_x$ and $J_y$ at future null infinity, (ii)        	 
+computing from the time-averaged linear metric perturbation the static
+$J_x$ and $J_y$ as functions of                      	 
+$C$, $E$, $L_z$ and appropriate parameters describing the black hole,
+and (iii) solving for $\dot{C}$                      	 
+by equating the angular momentum flux of step (i)    	 
+to the time derivative the angular momentum of step (ii).
+The first potential problem with this method is the fact that $x$- and
+$y$-components of angular momentum and angular momentum fluxes are not
+necessarily well defined.  However, we find \cite{Tichy_MGM9, Tichy_LISA} 
+that the
+ambiguities in these quantities arise at higher order in the adiabatic
+and test-particle expansions than the leading order terms relevant to
+this computation.  Therefore, this first problem can be circumvented.
+A more serious problem is that we have shown \cite{Tichy_LISA} that the 
+$x$- and $y$-components of the flux vanish identically, 
+when the $z$-axis is taken
+to point in the direction of the total angular momentum of the system,
+so that no useful information is obtained from $x$- and $y$-components
+of angular momentum.  
+
+
+
+\bigskip   
+\noindent
+{ \it Future outlook}
+\medskip
+
+An alternative approach which we are currently exploring is based on the
+fact that for scalar fields on the Kerr background, there is a
+conserved quantity associated with the Killing tensor used in the
+definition of the Carter constant \cite{priv_Ashtekar}. 
+It seems likely that this quantity and its fluxes can 
+be used instead of angular momentum in the steps (i)-(iii) above to 
+compute the evolution of the Carter constant in the case of scalar
+radiation. 
+Furthermore it is possible that an analogous conserved quantity
+exists for linearized metric perturbations in Kerr, and we are exploring
+this issue.  If such a conserved quantity does exist, it should be
+possible to compute, from the gravitational waves at the black hole
+horizon, a quantity allowing one to track the evolution of the Carter
+constant.  
+It might also be worthwhile to investigate 
+the possibility of extending
+the calculation to spinning test-particles.
+This is interesting since particles with spin will significantly deviate
+from a geodesic, even without radiation reaction, once the particle
+comes close to the black hole. 
+
+
+
+
+
+\bigskip
+\bigskip
+\noindent
+{\bf 4. Semiclassical Relativity}
+
+\bigskip
+\noindent
+{\it The stress-energy tensor of a massive scalar field }
+\medskip
+
+In semiclassical gravity, a classical metric is coupled to quantum fields.
+This is achieved by replacing the stress-energy tensor by its expected value
+in the Einstein equation. The resulting semiclassical Einstein equation is
+usually postulated rather than derived as there is no complete theory of
+quantum gravity from which it could be derived.
+ There are several well-known difficulties associated
+with the semiclassical theory.  First, there are difficulties
+associated with the existence of unphysical, exponentially growing
+``runaway'' solutions of the semiclassical Einstein equation, 
+which have not yet
+been completely resolved \cite{anec}.  The second difficulty,
+which is the subject of a research project \cite{Tichy_stress} 
+Professor \'E. Flanagan and I
+started in 1997, is the non-uniqueness of the
+expected stress-energy tensor on the right hand side of
+semiclassical Einstein equation.
+
+For a scalar field, several methods have been suggested for calculating
+the expected stress energy tensor.  These include
+(i) the ``point splitting'' algorithm \cite{WaldQFT}, (ii) the
+deWitt-Schwinger expansion method \cite{BirDav}, and (iii) the in-in
+effective action method \cite{Schwing,J1,CampVar}.  There is no
+general agreement as to which method is correct.  For
+example, it is claimed in Ref.\ \cite{WaldQFT} that the
+deWitt-Schwinger method is invalid for a massive scalar field since it
+does not have a regular limit as $m \to 0$, where $m$ is the mass.
+
+As is well known, a theorem of Wald \cite{Waldaxioms,WaldQFT} plays a
+crucial role in this field.  The theorem states that if one has two
+different prescriptions for obtaining stress tensors from metrics and
+from quantum states, and if these prescriptions obey a certain set of
+physically-motivated axioms, then the two prescriptions must agree up
+to local conserved curvature tensors. 
+The conventional view had been that this ambiguity is just a two parameter
+ambiguity, since there exist only two independent conserved local curvature
+tensors with the correct dimensions for a stress-energy tensor. We found
+that this argument, based on dimensional analysis, holds true only for
+massless scalar fields.  In the case of a massive scalar field the above
+argument fails, since there is a preferred mass scale present, namely the
+mass $m$ of the field.  
+Using this mass scale we were able to construct infinitely many 
+local conserved tensors by simply dividing by appropriate powers of 
+$m$ \cite{Tichy_stress},
+such that the tensors have the correct dimensions of a stress-energy tensor.
+The ambiguity in the stress-energy tensor allowed by the Wald
+axioms is therefore much worse in the massive case than in the
+massless case.  It is an infinite parameter ambiguity 
+rather than a two parameter
+ambiguity.  Of course, it is still possible that the various
+conventional calculational methods still agree to within the two
+parameter ambiguity \cite{Moretti}.  However,
+there is no guarantee that this should be the case.  
+
+
+
+Spacetimes which are linear perturbations off Minkowski spacetime
+form a useful testbed in which to probe these issues.
+In order to get an explicit example, we have calculated
+the expected stress-energy tensor in the incoming vacuum state 
+for a massive scalar field in such
+spacetimes, using the in-in effective action formalism
+\cite{Schwing,J1,CampVar}.  
+The stress-energy tensor we have found \cite{Tichy_stress}
+is causal, as it must be, and reduces to the known result of the
+massless case \cite{Horowitz,J2} in the limit $m \to 0$.
+Furthermore it is not a smooth function of $m^2$ at $m^2 =0$.
+The calculational method we used also automatically yields two
+undetermined parameters, so the result explicitly exhibits a two parameter
+ambiguity, just as in the massless case \cite{Horowitz},
+even though this is not guaranteed by the Wald axioms.
+
+\bigskip
+\noindent
+{ \it Future outlook }  
+\medskip
+
+After our paper \cite{Tichy_stress} had been published, 
+Salcedo \cite{Salcedo} showed that within the context of perturbative 
+quantum field theory (such as the effective action formalism)
+no more than a two
+parameter ambiguity can arise in the stress-energy tensor of a massive
+scalar field. This means that all methods using
+perturbative quantum field theory must
+agree up to the two parameter ambiguity. Yet, it is still possible that a
+larger ambiguity will be found if non-perturbative effects are taken into
+account. This raises the important question if there are additional axioms
+which would reduce the ambiguity in the stress-energy tensor.
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+\begin{thebibliography}{99}
+
+
+%%% NumRel %%%%%
+
+\bibitem{Cook_LivRev}
+G. B. Cook, Living Reviews in Relativity,
+http://www.livingreviews.org/Articles/Volume3/2000-5cook (2000)
+
+\bibitem{Bowen_York}
+J. M. Bowen and J. W. York Jr., Phys. Rev. D {\bf 21}, 2047 (1980)
+
+\bibitem{Cook_EffecPot}
+G. B. Cook, Phys. Rev. D {\bf 50},5025 (1994) 
+
+\bibitem{Jara_Schafer}
+P. Jaranowski and G. Sch\"afer, Phys. Rev. D {\bf 57}, 7274 (1998)
+
+\bibitem{York_Decomp}
+J. W. York Jr., J. Math. Phys. {\bf 14}(4), 456 (1973)
+
+\bibitem{Punc}
+S. Brandt and B. Bruegmann,
+Phys. Rev. Lett. {\bf 78}, 3606 (1997) 
+
+\bibitem{Tichy_PNdata}
+W. Tichy, B. Bruegmann, M. Campanelli and P. Diener,
+Phys. Rev. {\bf D 67}, 064008 (2003), gr-qc/0207011
+
+
+
+%%%% PN-Theory %%%%
+
+\bibitem{Chandra}
+S. Chandrasekhar, Astrophys. J. {\bf 142}, 1488 (1965)
+
+\bibitem{Chandra_cons}
+S. Chandrasekhar, Astrophys. J. {\bf 158}, 45 (1969)
+
+\bibitem{Chandra2PN}
+S. Chandrasekhar and Y. Nutku, Astrophys. J. {\bf 158}, 55 (1969)
+
+\bibitem{Damour}
+T. Damour, M. S. Soffel and C. Xu,  Phys. Rev. D {\bf 43}, 3273 (1991)
+
+\bibitem{Tichy_pn}
+W. Tichy and \'E. \'E. Flanagan, in preparation
+
+\bibitem{Dautcourt0}
+G. Dautcourt, Acta Physica Polonica {\bf B21}, 755 (1990)
+
+\bibitem{Dautcourt}
+G. Dautcourt, Class. Quant. Grav. 14: A109-A118 (1997),
+e-Print Archive: gr-qc/9610036
+
+
+%%% GWs %%%%%
+
+\bibitem{Blan-I-Will-Wis}
+L. Blanchet, B. R. Iyer, C. M. Will, A. G. Wiseman,
+Class. Quant. Grav. {\bf 13}, 575 (1996)
+
+% \bibitem{Blan-Dam-Will-Wis}
+% L. Blanchet, T. Damour, B. R. Iyer, C. M. Will, A. G. Wiseman,
+% Phys. Rev. Lett. {\bf 74}, 3515 (1995)
+
+\bibitem{Blanchet}
+L. Blanchet, Phys. Rev. D {\bf 54}, 1417 (1996)
+
+\bibitem{Tichy_gwnum}
+W. Tichy, \'E. \'E. Flanagan and E. Poisson, 
+Phys. Rev. D {\bf 61}, 104015 (2000) , gr-qc/9912075
+
+\bibitem{Finn_Thorne}
+L. S. Finn and K. S. Thorne, gr-qc/0007074
+
+% \bibitem{Sigurdsson}
+% S. Sigurdsson and M. J. Rees, 
+% Mon. Not. R. Astron. Soc {\bf 284}, 318 (1997)
+
+\bibitem{Mino_Sasaki}
+Y. Mino, M. Sasaki and T. Tanaka,
+Phys. Rev. D {\bf 55}, 3457 (1997)
+
+\bibitem{Quinn_Wald}
+T. C. Quinn and R. M. Wald,
+Phys. Rev. D {\bf 56}, 3381 (1997)
+
+\bibitem{Kennefick}
+D. Kennefick, Phys. Rev. D {\bf 58}, 064012 (1998)
+
+\bibitem{Hughes}
+S. A. Hughes, Phys. Rev. D {\bf 61}, 084004 (2000) 
+
+% \bibitem{BMS}
+% R. Sachs, Phys. Rev. {\bf 128}, 2851 (1962)
+
+% \bibitem{MTW}
+% C. W. Misner, K. S. Thorne and J. A. Wheeler, {\it Gravitation},
+% W. H. Freeman and Company, New York (1973)
+
+\bibitem{Tichy_MGM9}
+W. Tichy and \'E. \'E. Flanagan,
+  edited by V.G. Gurzadyan, R.T. Jantzen and R. Ruffini,
+  World Scientific, Singapore, 1622, (2002)
+
+\bibitem{Tichy_LISA}
+W. Tichy and \'E. \'E. Flanagan, Class. Quant. Grav. {\bf 18}, 3995 (2001)
+
+\bibitem{priv_Ashtekar}
+A. Ashtekar, private communication
+
+
+
+%%% Semiclassical Relativity %%%%
+
+\bibitem{anec}
+\'E.\ \'E.\ Flanagan and R.\ M.\ Wald, Phys. Rev. D {\bf 54}, 6233 (1996)
+
+\bibitem{Tichy_stress}
+W. Tichy and \'E. \'E. Flanagan,
+Phys. Rev. D {\bf 58}, 124007 (1998) , gr-qc/9807015
+
+\bibitem{WaldQFT}
+R.M.~Wald, {\it Quantum Field Theory in Curved
+Spacetime and Black Hole Thermodynamics}, University of Chicago Press,
+Chicago (1994).
+
+\bibitem{BirDav}
+N. D. Birell and P. C. W. Davis {\it Quantum fields in curved space},
+Cambridge University Press, Cambridge (1982).
+
+\bibitem{Schwing}
+J. Schwinger, J. Math. Phys. {\bf 2}, 407 (1961).
+
+\bibitem{J1}
+R. D. Jordan, Phys. Rev. D {\bf 33}, 444 (1986).
+
+\bibitem{CampVar}
+A. Campos and E. Verdaguer, Phys. Rev. D {\bf 49}, 1861 (1994).
+
+\bibitem{Waldaxioms}
+R.\ M.\ Wald, Commun.\ Math.\ Phys.\ {\bf 54}, 1 (1977); Phys. Rev. D
+{\bf 17}, 1477 (1978).
+
+\bibitem{Moretti}
+V. Moretti, Phys. Rev. D {\bf 56}, 7797 (1997), gr-qc/9805091
+
+\bibitem{Horowitz}
+G. T. Horowitz, Phys. Rev. D {\bf 21}, 1445 (1979).
+
+\bibitem{J2}
+R. D. Jordan, Phys. Rev. D {\bf 36}, 3593 (1987).
+
+\bibitem{Salcedo}
+L. L. Salcedo, Phys. Rev. D {\bf 60}, 107502 (1999)
+
+
+
+
+\end{thebibliography}
+
+
+
+\end{document}
+
+

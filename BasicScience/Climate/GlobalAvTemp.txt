@@ -1,0 +1,33 @@
+English: Graphs showing correlation of measured global average temperature, from five different scientific organizations.
+Graphs of datasets from five scientific organizations were vertically adjusted, if needed, to a common reference/base period 1951-1980:
+
+1. NASA GISS NAVIGATION PAGE:
+
+https://data.giss.nasa.gov/gistemp/graphs_v4/
+NASA GISS SOURCE:
+https://data.giss.nasa.gov/gistemp/graphs_v4/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt
+Data: 1880-
+Base: 1951-1980
+2. : SOURCE: HadCRUT.5.0.1.0:
+
+https://www.metoffice.gov.uk/hadobs/hadcrut5/data/current/download.html
+Choose "HadCRUT4 time series: ensemble medians and uncertainties", "Global (NH+SH)/2", "Annual". (Link invokes download window; earlier years pointed to text file)
+Data: 1850-
+Base: 1961-1990
+3. NCDC NOAA SOURCE:
+
+https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/12/12/1880-2021/data.csv (URL changes each year 2020-->2021-->2022 etc.)
+Data: 1880-
+Base: 1901-2000
+4. JAPAN METEOROLOGICAL OFFICE DESCRIPTION PAGE:
+
+https://ds.data.jma.go.jp/tcc/tcc/products/gwp/temp/ann_wld.html
+SOURCE:
+https://ds.data.jma.go.jp/tcc/tcc/products/gwp/temp/list/csv/year_wld.csv
+Data: 1891-
+Base=1991-2020 (changed from 1981-2010)
+5. BERKELEY EARTH SOURCE:
+
+http://berkeleyearth.lbl.gov/auto/Global/Land_and_Ocean_summary.txt
+Data: 1850-
+Base: 1951-1980

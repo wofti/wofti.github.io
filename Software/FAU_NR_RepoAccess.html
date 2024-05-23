@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>FAU NR git repos</TITLE>
+</HEAD>
+
+<!--
+<BODY BGCOLOR="#C0C0C0" TEXT="#000000">
+-->
+<BODY BGCOLOR="#000000" TEXT="#bba400"
+link="ccddff" vlink="cc0000" alink="ffffff">
+
+
+<A HREF="../index.html"><H1>Wolfgang Tichy</H1> </A>
+
+<HR>
+<H2>Accessing the non-public git repos of the FAU NR group</H2>
+
+All NR repos at FAU are accessed via ssh keys.
+The ssh keys only work if they are secured by a good passphrase.
+
+Note that once you have created a (public/private) keypair, you can use it
+on any of your computers by simply copying them there. I.e. you need only
+one key for our repos!
+
+The only complication is that the server (quark.physics.fau.edu) is behind a
+firewall and thus can only be accessed via a bastion host
+(bast.hpc.fau.edu). Thus you need to add the following to your .ssh/config :
+<PRE>
+Host bast-giter
+   Hostname bast.hpc.fau.edu
+   User giter
+   IdentityFile  path_to_private_key_on_local_client
+
+Host quark.physics.fau.edu
+   IdentityFile  path_to_private_key_on_local_client
+   User giter
+   ProxyCommand ssh -W %h:%p  giter@bast-giter
+</PRE>
+
+Once this is done, you should test if ssh is setup correctly. Just type:
+<PRE>
+ssh giter@quark.physics.fau.edu info
+</PRE>
+This should list all the repos you can access.
+
+In order to get a repo type:
+<PRE>
+git clone giter@quark.physics.fau.edu:name_of_repo
+</PRE>
+
+<HR>
+
+Note that whenever you make a connection, computers such as
+quark.physics.fau.edu or bast.hpc.fau.edu will need your key. To access the
+key your key-passphrase is needed. If you want to type this passphrase less
+often, you can set up
+<A HREF="https://en.wikipedia.org/wiki/Ssh-agent">ssh-agent</A>
+or a similar program.
+
+The
+<a href="https://github.com/wofti/WTscripts">add-key.py script</a>
+can be used for this purpose.
+
+For more info on ssh keys and agents see
+<A HREF="ssh.html">ssh.html</A>.
+
+
+</BODY>
+<HTML>

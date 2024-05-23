@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>ssh keys</TITLE>
+</HEAD>
+
+<!--
+<BODY BGCOLOR="#C0C0C0" TEXT="#000000">
+-->
+<BODY BGCOLOR="#000000" TEXT="#bba400"
+link="ccddff" vlink="cc0000" alink="ffffff">
+
+
+<A HREF="../index.html"><H1>Wolfgang Tichy</H1> </A>
+
+<HR>
+<H2>ssh keys</H2>
+
+<ul>
+<li>	Create a public/private key pair with</li>
+<PRE>
+cd ~/.ssh
+ssh-keygen
+</PRE>
+<li>   Be sure to set a good passphrase when asked in the step above!!!</li>
+<li>   This makes the files id_rsa.pub and id_rsa</li>
+<li>   id_rsa.pub is the public key, id_rsa is the private key
+<li>   You can share the public key with anyone, but never share the
+       private key
+<li>   The public key can now be stored on the machine where we want to
+       log in without password</li>
+<li>   Copy it to e.g. koko-login.hpc.fau.edu by using</li>
+<PRE>
+ssh-copy-id koko-login.hpc.fau.edu
+</PRE>
+<li>   Never email the private key id_rsa, keep it safe!</li>
+</ul>
+
+<HR>
+<H2>Using an agent for your keys</H2>
+
+Note that whenever you make a connection, computers such as
+quark.physics.fau.edu or bast.hpc.fau.edu will need your key. To access the
+key, your key-passphrase is needed. If you want to type this passphrase less
+often, you can set up
+<A HREF="https://en.wikipedia.org/wiki/Ssh-agent">ssh-agent</A>
+or a similar program.
+
+On Linux ssh-agent should be already installed. But there is also
+GNOME Keyring and KWallet, which can be used for the same purpose.
+ 
+ 
+<ul>
+<li>   Check if ssh-agent is running and has keys:</li>
+<PRE>
+ssh-add -l
+</PRE>
+<li>   In case it says
+       "Could not open a connection to your authentication agent",
+       you can start the agent with:</li>
+<PRE>
+eval `ssh-agent`
+</PRE>
+<li>   To add a key to the agent type:</li>
+<PRE>
+ssh-add path_to_private_key_on_local_client
+</PRE>
+<li>  This will ask for your passphrase, but then remembers it for
+      later. This way you don't have to enter it all the time.</li>
+<li>  The
+<a href="https://github.com/wofti/WTscripts">add-key.py</a> script in
+<a href="https://github.com/wofti/WTscripts">https://github.com/wofti/WTscripts</a>
+      can be used to simplify this process.</li>
+</ul>
+
+
+<HR>
+<H2>Using
+<a href="https://github.com/wofti/WTscripts">add-key.py</a>
+for your keys</H2>
+
+<ul>
+<li>  Note that add-key.py still uses ssh-agent.
+      It merely simplifies its use.</li>
+<li>  Installing add-key.py:</li>
+<PRE>
+cd ~
+git clone https://github.com/wofti/WTscripts.git
+mkdir bin
+ln -s ~/WTscripts/add-key.py ~/bin/add-key.py
+</PRE>
+<li>  Display help:</li>
+<PRE>
+add-key.py -h
+</PRE>
+<li>  Usage:</li>
+<PRE>
+eval `add-key.py path_to_private_key_on_local_client`
+</PRE>
+<li>  This will check if ssh-agent is running. If yes it will add the key,
+      it not it will start ssh-agent and then add the key.</li>
+</ul>
+
+
+</BODY>
+<HTML>

@@ -1,0 +1,235 @@
+# example parfile for BNS simulations
+# Z4c, shells, high-order flux in hydro
+
+physics = adm z4 Gauge matter eos grhd BNSdataReader Invariants ADM_mass AHmod hydroanalysis
+ 
+#############################################################################
+# initial data
+
+BNSdataReader_sgrid_exe         = /home1/00304/tg455767/sgrid/exe/sgrid-nomp
+BNSdataReader_sgrid_datadir     = SLy_m1.35o0_-.0012_-.0061_28
+BNSdataReader_keep_sgrid_output = yes
+BNSdataReader_use_interpolator  = no # yes
+BNSdataReader_IDfiles_dir	= ID_SLy_m1.35o0_-.0012_-.0061_28_64
+BNSdataReader_reset_EOS         = yes  
+BNS_eos_Gamma                   = 1.75
+
+############################################################################
+# checkpointing
+
+checkpoint                  = yes
+checkpoint_variables        = all
+checkpoint_dt_hours         = 11.4
+checkpoint_dt_hours_quit    = 47
+
+
+############################################################################
+# basic setup
+
+order_centered              = 4
+order_advection             = 4
+advection_lopsided6         = 2
+advection_lopsided          = 1
+
+order_dissipation           = 6
+dissipation_factor          = 0.5
+dissipation_factor_shells   = 0.06 # sometimes Tim has 0.05
+
+bampi_timer_on              = yes
+bampi_lowlatency            = yes
+bampi_nghosts               = 6
+order_RP                    = 6
+order_RP_shells             = 6
+amr_nbuffer                 = 6
+
+amr_lmax                    = 6
+nxyz                        = 160
+amr_move_lcube              = 2
+amr_move_nxyz               = 64
+
+amr_shells_nr               = 128
+amr_shells_nphi             = 56
+
+dxyz                        = 8*1.88
+amr_bo_dxmax                = 2.0
+
+amr                         = bo newfmr move
+amr_fmr                     = nestedboxes
+grid                        = box bitant
+
+#############################################################################
+# evolution
+
+evolution_method            = rk
+evolution_method_rk         = rk4g
+dtfac                       = 0.25
+finaltime                   = 20000
+
+z4_normalizedetg            = yes
+z4_subtractA                = yes
+z4_chi_div_floor            = 1e-5
+
+z4_initial_lapse            = donothing
+z4_initial_shift            = zero
+z4_lapse                    = 1+log withshift
+z4_shift                    = gamma0 withGadv withBadv withShiftadv
+z4_shiftalphapower          = 0.0
+z4_shiftdriver              = 0.3
+z4_shiftgammacoeff          = 0.75
+
+z4_kappa1                   = 0.02
+z4_kappa2                   = 0.0
+
+punctures_lapse             = psiBL^(-2)
+
+
+#############################################################################
+# eos
+
+eos             = pwphot  # pwp
+eos_Gamma       = 1.75
+eos_tab_file    = /home1/00304/tg455767/bam_14.07/src/projects/eos/tab/pwpfits/eos_sly.pwp
+
+#############################################################################
+# hydro
+
+grhd_C2P		    = p_root
+grhd_C2P_NewtonRaphsonTR    = 1e-9
+grhd_C2P_NewtonRaphsonNR    = 250
+
+grhd_vmax                   = 0.9999
+grhd_Wlor_max		    = 1e8
+
+grhd_use_atmosphere	    = ColdStatic
+grhd_atm_factor		    = 1e2
+grhd_atm_level		    = 1e-11 
+grhd_use_atmosphere_mask    = yes
+grhd_recvel                 = bx
+
+hrsc_nghosts		    = 4
+hrsc_rec		    = WENOZ
+hrsc_TVD_limiter	    = MC2
+hrsc_rec_metric		    = LAG6
+hrsc_flux		    = HO_LLF # LLF
+
+grhd_use_excision	    = no
+grhd_excision_rfct	    = 0.9
+grhd_excision_modus	    = atm
+
+#############################################################################
+# output
+# (make sure outtime is multiple of dt!)
+
+stdout_flush = yes
+
+0douttime               = 0.5*1.88
+0doutput                = alpha ham momx momy momz grhd_rho grhd_D hydroa_Dh hydroa_Du hydroa_Db hydroa_vorx hydroa_vory hydroa_vorz hydroa_etot hydroa_uesc
+
+#1douttime               = 0.5*1.88
+#1doutput                = rpsi4 ipsi4
+#1doutinterpolate        = no # yes
+#1doutputall             = yes
+
+2douttime               = 2*1.88
+2doutput                = alpha bssn_chi bssn_K ham momx rpsi4 ipsi4 grhd_rho grhd_epsl grhd_p grhd_v grhd_v2 grhd_vx grhd_vy grhd_D grhd_S grhd_Tau hydroa_Du 
+2doutputmode            = xy xz
+2dformat                = vtk binary float
+2doutinterpolate        = no # yes
+2doutputall             = yes
+2doutputr               = rpsi4 ipsi4
+2doutputr_type          = SphericalDF
+
+
+#############################################################################
+# boundary
+
+boundary                = background radcentered
+
+############################################################################
+# gauge
+
+Gauge                   = moving_puncture
+compute_moving_puncture_distance = line
+
+track_matter_var        = alpha
+track_matter_mode       = min
+track_matter_minmove    = 0.01
+
+#############################################################################
+# invariants
+# (rem wave extraction closer than 150M is useless)
+
+ntheta                      = 47
+nphi                        = 46
+invariants_compute_modes    = yes
+invariants_modes_r          = 250 300 350 400 450 500 550 600 650 700 750 800 850 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000
+invariants_modes_lmin       = 0
+invariants_modes_lmax       = 3
+invariants_energy_r         = 250 300 350 400 450 500 550 600 650 700 750 800 850 900 1000 1100	1200 1300 1400 1500 1600 1700 1800 1900	2000
+gauss_codacci_mainardi      = standard
+invariants_order            = 6
+
+#############################################################################
+# ADM Mass
+# (extract same radii as waves)
+
+ADM_mass_ncircles     = 101
+ADM_mass_npoints      = 80
+ADM_mass_lmin         = 0
+ADM_mass_lmax         = 3
+ADM_mass_r            = 250 300 350 400 450 500 550 600 650 700 750 800 850 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000
+
+#######################################################
+# AH finder
+
+AHmod_verbose     = no
+
+AHmod_ntheta      = 30
+AHmod_nphi        = 60
+AHmod_LMAX        = 10
+
+AHmod_interpolation_order = 4
+
+AHmod_nhorizons   = 1
+AHmod_searchMTS   = 1  6000.0  20000.0  0
+AHmod_uselast     = yes
+
+AHmod_initial_guess_expand = 1.0
+AHmod_LevelOffset = 1
+AHmod_UseOptimalLevel = no
+
+#AHmod_box_savety_factor = 1.2
+
+AHmod_surface0_WaitUntilClosePunctures = no
+
+#AHmod_merger_distance = 0.1
+
+AHmod_flow_iter   = 500
+AHmod_mass_tol    = 1.0e-04
+AHmod_hmean_tol   = 100.0
+
+AHmod_time        = 2*1.88
+
+AHmod_output      = yes
+AHmod_output_xyt  = yes
+AHmod_output_lm   = yes
+
+
+#######################################################
+#hydroanalysis
+
+hydroanalysis_Mbar_radius  = 8
+hydroanalysis_Mbar_nradius = 10
+hydroanalysis_Mbar_dradius = 0.5
+hydroanalysis_rATM         = 1e-12
+hydroa_mode_projection     = yes
+
+#######################################################
+#puncture properties
+
+moving_puncture_properties  = yes
+puncture_properties_r       = 8 9 10 11 12 14 15 20
+puncture_properties_punc    = 2
+puncture_properties_npoints = 40
+puncture_properties_circles = 41
+

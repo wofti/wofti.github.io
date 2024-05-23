@@ -1,0 +1,629 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Note: {Tichy03} has to be changed
+%	 {priv_Ashtekar} is still undefined
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+
+%\hfuzz 10pt
+%\font\bigbf=cmb10 scaled\magstep2
+%\font\smaller=cmr9
+
+
+% From Phil
+\setlength{\textwidth}{17.1cm}
+\setlength{\textheight}{24.2cm}
+\setlength{\hoffset}{-0.2cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\topmargin}{0cm}
+\setlength{\voffset}{-0.8cm} 
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+
+\usepackage{setspace}
+
+\begin{document}
+\begin{spacing}{0.95} 
+
+
+\centerline{\bf \Large Research Interests: Wolfgang Tichy}
+\bigskip
+
+My main expertise is in numerical simulations of the Einstein equations in
+the fully non-linear regime. In particular, I am working on simulations of
+binary black hole and binary neutron star systems. 
+I have experience in both the time evolution of
+such systems and also in the construction of realistic initial data.
+The accurate modeling of the inspiral and merger phase of black hole 
+or neutron star binaries is one of the
+major challenges in gravitational wave physics today.
+Due to advances in supercomputer technology,
+new formulations of the evolution equations,
+and improved numerical methods it now possible to simulate
+such binaries from the late inspiral stage all the way to 
+the final merged state. The results of
+these simulations are currently being used to extract and analyze signals of
+binary inspirals and mergers from data acquired by
+interferometric gravitational wave detectors such as LIGO, GEO and VIRGO.
+%and they will also be used for the planned LISA.
+Apart from being a pressing problem from the data analysis viewpoint, 
+the merger of compact objects is also of fundamental importance,
+as it probes the fully non-linear regime of Einstein's equations.
+Furthermore, the analysis neutron star mergers can yields information
+about the equation of state of matter at nuclear density.
+These different aspects make it very
+exciting for me to work in this field.
+
+In addition, my research interests also span a broad range of other topics
+in relativity and astrophysics including post-Newtonian theory,
+gravitational waves, radiation reaction, and semiclassical relativity. In my
+opinion it is very important to have a broad range of knowledge and
+interests.  This ``big picture'' view facilitates cooperation with
+researchers in other areas of science.
+
+
+
+
+\medskip
+\bigskip
+\centerline{\bf \large Current and Past Research}
+\medskip % \bigskip
+
+
+\noindent
+{\bf Initial data for black hole inspirals }
+\smallskip
+
+Mergers of two black holes with masses of $\sim 10-100M_{\odot}$ will be
+observable by the ground based gravitational wave detectors.  In order to
+predict their highly relativistic orbits and waveforms, fully nonlinear
+numerical simulations should be used. All such numerical simulations must
+begin by specifying initial data. I am very interested in constructing
+initial data that accurately represent astrophysical systems such as two
+black holes orbiting each other, because only then will a simulation be
+astrophysically relevant. Together with B. Br\"ugmann, M. Campanelli and P.
+Diener, I have worked on a project to generate post-Newtonian based initial
+data for two inspiraling black holes. The idea is that even though
+post-Newtonian theory may not be able to evolve two black holes when they
+get close, it can still provide initial data for fully nonlinear numerical
+simulations, if we start at a separation where post-Newtonian theory is
+valid.
+% We use post-Newtonian
+% equations computed by P. Jaranowski and G. Sch\"afer as a starting point.
+However, before this data can be used in general relativistic simulations we
+have to modify it, since post-Newtonian theory in principle deals with point
+particles and not black holes. Also, the pure post-Newtonian data do not
+fulfill the constraint equations of General Relativity. To overcome these
+problems we first resum the post-Newtonian expansion in such a way that the
+data do contain black holes. In a second step we then project the data onto
+the solution manifold of General Relativity by solving the constraint
+equations~\cite{Tichy02} using the Cactus code. The resulting data do
+satisfy the constraint equations of General Relativity, and incorporate
+post-Newtonian features in the sense that they are close to the original
+post-Newtonian data.
+
+
+
+Post-Newtonian calculations predict that black hole binaries are expected to
+move on quasi-circular orbits with a slowly shrinking radius, i.e.\ the
+binary system is in quasi-equilibrium. Together with B. Br\"ugmann and P.
+Laguna, I have started to investigate how to find coordinate systems which
+corotate with the two orbiting black holes. Such coordinate systems have the
+advantage that the rapid circular motion of the two black holes is
+transformed away so that one has to simulate only the slower drift of the
+holes toward each other. It is hoped that then the numerical simulations
+will be more accurate and stable. 
+% Furthermore techniques to excise the black
+% hole singularity from the computational domain simplify if the black holes
+% do not move through the domain. 
+In order to find such corotating coordinates
+for the initial data, we use several conditions which hold if the orbital
+timescale is much shorter than the inspiral timescale. In particular, we use
+necessary conditions for the existence of an approximate helical Killing
+vector, such as equality of Komar and ADM mass. As a first step we have
+applied these ideas~\cite{Tichy03a} to standard puncture initial data, which
+are similar to, but simpler than, the post-Newtonian based initial data
+discussed above. We have also been able to use our conditions to construct
+sequences of quasi-equilibrium puncture initial data~\cite{Tichy:2003qi}.
+% We have then numerically computed the magnitudes of the time derivatives 
+% of different metric components. The result is that the 3-metric evolves on a
+% timescale larger than the orbital timescale. However, some components of
+% the extrinsic curvature still evolve on the orbital timescale.
+% This means that we have been only partially succuessful in the construction
+% of quasi-equilibrium data.
+
+
+%\medskip % \bigskip
+%\noindent
+%{\it Extreme mass ratio limit of puncture data }
+%\medskip
+
+All numerical calculations described so far were carried out on finite
+spatial domains using finite differencing techniques. Recently M. Ansorg, B.
+Br\"ugmann and I have implemented a new numerical method for the computation
+of puncture data. It involves a coordinate transformation, which
+compactifies all of space into a finite box.
+% , with the punctures sitting on two edges. 
+In these coordinates we are able to use a spectral method to
+numerically solve the initial data equations. The result is much more
+accurate and requires far less computational resources than the one
+obtained using conventional finite differencing techniques.
+We are working on using this accuracy to investigate puncture data in the
+small mass ratio limit. The aim is to compare puncture data in this limit
+with the known analytic solution of a point particle in circular orbit
+around a black hole. In this way it will be possible to assess the 
+astrophysical quality of puncture data.
+
+
+
+\medskip
+\noindent
+{\bf Black hole evolutions}
+\smallskip
+
+Once we have computed the initial data for a binary black hole system, we
+are in principle set up to simulate their inspiral and merger. Unfortunately
+however, this area of research is plagued by numerical instabilities that
+have so far prevented long term simulations. For this reason I am very
+interested in formulations of the Einstein equations with better stability
+properties. First order symmetric hyperbolic formulations of the evolution
+equations are promising in this respect, as they are guaranteed to yield
+results which converge to the true solution at least for a finite time
+interval. However, even if an evolution system is symmetric hyperbolic there
+is no guarantee that its numerical implementation will be stable in the long
+run when we evolve a highly dynamic black hole spacetime. Thus any system
+of interest should be tested numerically before we can draw
+definite conclusions about its stability.
+
+Recently I have been involved in implementing and testing two new evolution
+systems. The first one was devised by Alekseenko and Arnold. This system as
+a whole is not symmetric hyperbolic, however it possesses a symmetric
+hyperbolic subsystem. Together with N. Jansen and B. Br\"ugmann I have
+implemented and tested the numerical stability of this system within the BAM
+code~\cite{Jansen03}. Unfortunately, our numerical experiments show that it
+is less stable than the well known Baumgarte-Shapiro-Shibata-Nakamura (BSSN)
+system when we evolve black holes in gauges which enhance stability, at
+least for the BSSN system.
+
+B. Br\"ugmann and I are currently investigating several strongly hyperbolic
+first order versions of the BSSN system. In particular, I have focused on a
+system devised by Frittelli and Reula, which is the first order extension of
+the BSSN system with the least number of variables. I have derived a
+parametrized transformation of variables which for a particular parameter
+choice brings the Frittelli-Reula system into a form that extends another
+first order version of BSSN due to Alcubierre, Br\"{u}gmann, Miller and
+Suen, in effect unifying the two systems~\cite{Tichy04}.
+The transformation is designed
+such that it does not alter the hyperbolic properties of the original
+Frittelli-Reula system. I have also implemented this new system in the BAM
+code. Preliminary numerical results indicate that the system is not as stable
+as the original BSSN system. However our system has several free parameters
+and it is possible that stability will improve once we find the 
+appropriate choice of parameters.
+
+I am also actively involved in binary black hole evolutions using the more
+traditional BSSN system.  I am working on extending the lifetime of our
+simulations by choosing a shift which brings the black hole binary into
+corotating coordinates. I have also worked on new techniques to excise the
+black hole interiors from the computational grid, so that we can better use
+the new types of initial data described above, which tend to be such that
+instabilities occur inside the black holes.
+
+The simulations described so far were performed on a single computational
+grid with uniform resolution. However in order to resolve the black holes a
+certain minimum resolution is needed. Using this same resolution also away
+from the black holes is wasteful in terms of computer resources, so that it
+is for example impossible to put the outer grid boundary far from the black
+holes. For this reason it I am intrigued by the idea of mesh refinement,
+which allows several overlapping computational grids with different
+resolutions. Together with B. Br\"ugmann, I am currently involved in an
+effort to introduce mesh refinement into the BAM code.  Using several nested
+grids with different resolutions we are starting to perform evolutions of a
+single black hole, which seem to be just as stable as without mesh
+refinement.
+
+
+
+
+
+
+
+\medskip % \bigskip
+\noindent
+{\bf Coordinate independent formulation of post-Newtonian theory} 
+\smallskip
+
+In many problems of interest in astrophysics it is impossible to solve the
+full Einstein equations of General Relativity analytically. For this reason
+the post-Newtonian expansion in powers of velocity over the speed of light
+has been developed. Usually, the equations of post-Newtonian theory are only
+given in a specific coordinate system (or gauge). In each of the many
+possible gauges the post-Newtonian equations take a different form, which
+has the disadvantage that it is often hard to compare calculations in
+different gauges. The situation is somewhat analogous to knowing
+electrodynamics only in a couple of different gauges without knowing the
+underlying gauge invariant Maxwell equations.
+\'E. Flanagan and I have started investigating the possibility of
+a gauge independent formulation of post-Newtonian General Relativity. At
+first post-Newtonian order, we have found such a theory~\cite{Tichy03}. It
+is formulated solely in terms of geometric objects, such as connections and
+tensors. We are able to show from our equations that the usual
+coordinate-dependent equations of post-Newtonian gravity can be recovered
+when one specializes to specific coordinates.  
+% It should also be possible to find higher than just post-1-Newtonian
+% corrections by expanding General Relativity to higher orders.
+
+
+
+
+\medskip % \bigskip
+\noindent
+{\bf Post-Newtonian gravitational waveforms }
+\smallskip
+
+The detection of gravitational waves from the inspiral of a compact binary
+depends crucially on the availability of accurate template waveforms, as the
+signal is likely to be buried in noise. If such a signal is to be detected
+using matched filtering, high accuracy is needed in the phase of the
+template. This phase is derived from the energy balance equation which
+states that the energy loss rate is equal to the gravitational wave
+luminosity of the binary. 
+\'E. Flanagan, E. Poisson and I~\cite{Tichy:1999pv} have investigated
+if the accuracy of the templates' phase can be improved by solving the
+post-Newtonian energy balance equation exactly numerically, rather than (as
+is normally done) solving the energy balance equation analytically within
+the post-Newtonian perturbative expansion. We found evidence that there is
+no gain in accuracy. This result is disappointing, but constitutes useful
+information from the point of view of generating template banks for inspiral
+searches: there is no motivation in terms of increased event rate to solve
+numerically for the wave's phase.
+
+
+
+
+\medskip % \bigskip
+\noindent
+{\bf Towards computing the radiation reaction force
+        for test-particles in Kerr spacetime}
+\smallskip
+
+The inspiral of compact stellar mass objects into supermassive black holes
+is an important source of gravitational waves which could be detected by the
+planned space-based LISA detector. Since the mass ratio is small, the
+compact object is well approximated by a test-particle. In order to find the
+inspiral orbit of a test-particle due to radiation reaction, \'E. Flanagan
+and I have tried to approximate the orbit as a sequence of geodesic orbits,
+with constants of the motion that slowly change on a radiation reaction
+timescale. The idea is to compute this adiabatic evolution of the constants
+of the motion from quantities such as energy and angular momentum and their
+fluxes at future null infinity. The first potential problem was that angular
+momentum is not necessarily well defined. However, we find~\cite{Tichy00b}
+that angular momentum ambiguities arise only at higher order in the
+adiabatic expansions and can thus be neglected. A more serious problem is
+that we have shown~\cite{Tichy00b} that the $x$- and
+$y$-components of the angular momentum flux vanish identically in the
+adiabatic approximation, so that energy and angular momentum alone do
+not contain enough information to compute the evolution of all constants of
+the motion for generic non-circular orbits around rotating (Kerr) 
+black holes.
+
+
+
+
+
+\medskip % \bigskip
+\noindent
+{\bf The expected stress-energy tensor of a massive scalar field }
+\smallskip
+
+In semiclassical relativity, a classical metric is coupled to quantum
+fields. This is achieved by replacing the classical stress-energy tensor by
+its expected value in the Einstein equation. A difficulty in semiclassical
+relativity is the non-uniqueness of the expected stress-energy tensor. Wald
+has postulated a set of physically well motivated axioms or criteria, which
+any expected stress-energy tensor has to satisfy.  For a massive scalar
+field \'E. Flanagan and I have shown that the ambiguity in the
+stress-energy tensor allowed by the Wald axioms is an infinite parameter
+ambiguity~\cite{Tichy:1998ws}, which is different from the two parameter
+ambiguity known for massless scalar fields. In order to get an explicit
+example, we have also calculated the expected stress-energy tensor in the
+incoming vacuum state for a massive scalar field in a spacetime which is
+a linear perturbation of Minkowski spacetime. Somewhat surprisingly, the
+result of our specific calculation explicitly exhibits only a two parameter
+ambiguity, just as in the massless case, even though this is not guaranteed
+by the Wald axioms. 
+It will be interesting to see if the Wald axioms can be
+extended to rule out more than two undetermined parameters in the massive
+case as well.
+
+
+
+
+
+
+
+
+
+\bigskip
+\bigskip
+
+\clearpage
+
+\noindent
+\centerline{\bf \large Future Research Plans}
+\medskip % \bigskip
+
+\noindent
+{\bf Astrophysically realistic initial data}
+\smallskip
+
+Black hole inspirals and mergers will be observable by gravitational wave
+detectors. In the coming years numerical simulations will be used to predict
+their highly relativistic orbits and waveforms. However, the astrophysical
+relevance of numerical simulations depends crucially on the use of
+astrophysically realistic initial data. There are at least two conditions
+which the data have to fulfill in order to be realistic: (i) the data have
+to agree with post-Newtonian data far from the black holes, (ii) near the
+black holes they should agree with predictions from black hole perturbation
+theory, in particular the black holes should have the correct amount of
+tidal deformation. In addition it would be very useful to have the data in
+coordinates, which are corotating with the black holes. Our post-Newtonian
+data~\cite{Tichy02} already satisfy (i). I have several ideas on how to
+verify the quality of the initial data near each horizon by comparing with
+perturbed black hole results. For example, it will be important to
+determine the tidal deformation of the horizon. Preliminary calculations
+show that this tidal deformation should be very small for realistic data. It
+may also be useful to use the isolated horizon framework, introduced by
+Ashtekar and collaborators, to compute invariant quantities on the horizon.
+Together with quantities computed at infinity this may open a way to
+estimate the radiation content of the data. In this area there is a lot of
+opportunities for collaboration with mathematical relativists.  I plan to
+use these different ideas to develop a set of tests, which can be used to
+assess the quality of initial data sets. I also want to use my knowledge
+about post-Newtonian theory to match perturbed black hole solutions to
+post-Newtonian solutions in order to obtain more realistic data. 
+% This would
+% also complement research on perturbed black holes already pursued at LSU.
+Combining different perturbation methods with numerical calculations may
+give valuable information about black hole binaries at intermediate
+separations and will provide better initial data for fully numerical
+simulations.
+
+Another line of research I want to follow up on is to use the Cactus code
+to evolve our post-Newtonian data~\cite{Tichy02}, and then to extract
+waveforms using the Lazarus approach pioneered by Baker, Br\"ugmann,
+Campanelli and Lousto. I have just started to collaborate on this project
+with M. Campanelli at the Center for Gravitational Wave Astronomy in
+Brownsville. The idea is that even if our post-Newtonian data is not yet
+completely realistic in terms of astrophysical content, we want to get the
+infrastructure ready to extract waves from numerically evolved
+post-Newtonian data. At the same time I am also planning to add
+post-Newtonian waveforms to our initial data. If we then evolve numerically
+we might eventually be able to compute numerical waveforms, which
+continuously match post-Newtonian waveforms.
+
+
+\noindent
+{\bf Binary Neutron stars with arbitrary spins}
+\smallskip
+
+As in the case of black holes, astrophysically realistic neutron stars are
+expected to be spinning. In the case of milisecond a pulsar the
+rotational velocity not too far from the mass shedding limit
+which implies a dimensionless spin magnitude that could
+be close to one. In a binary such spins would influence the
+neutron star trajectories even before merger, and the merger
+could also be influenced, e.g. if the merged object would have
+too much angular momentum.
+I propose to study the effects of high spins in neutron star
+mergers. As already mentioned (in ???) my SGRID code can produce
+neutron star initial data for corotating configurations. I intend
+to extend this method to allow arbitrary spins. Once I have
+initial data I plan to use the Whisky
+code to evolve the two stars. This hydrodynamics 
+code which is publically available 
+and offers mesh refinement via the Carpet driver,
+is ideally suited for this task.
+
+
+
+
+\medskip % \bigskip
+\noindent
+{\bf Fully non-linear evolutions}
+\smallskip
+
+So far fully non-linear numerical evolutions of black holes in three
+dimensions have always been hampered by numerical instabilities. I think
+that it is a fascinating challenge to come up with improvements in this
+area. I plan to continue working on symmetric hyperbolic evolution systems
+for the Einstein equations in order to improve numerical stability.
+% This
+% would enhance research in this direction already carried out at LSU. 
+In addition I am interested in finding gauge conditions which are well adapted
+to the problem at hand, such as corotating coordinates for the binary black
+hole problem. There are however several other ideas I wish to explore.
+Einstein's equations naturally split into evolution equation and constraint
+equations. Usually one solves the constraint equations for the initial data.
+After that one only uses the evolution equations to evolve forward in time.
+Analytically this is perfectly reasonable as the evolution equations
+preserve the constraints. However numerical errors may cause the numerical
+solution to wander away from constraint fulfillment, resulting in a solution
+which does not satisfy all of Einstein's equations. Moreover such constraint
+violations often grow exponentially and cause the computer code to fail. I
+plan to investigate methods to suppress constraint violations. One possible
+avenue is to use my experience in solving elliptic equations to re-solve the
+constraints at least from time to time during the evolution. A second
+possibility is to introduce additional variables, such that some of the
+constraint equations become evolution equations for these new variables,
+with the effect that these constraints are then automatically satisfied
+during evolution. I think it is also possible to combine these two methods.
+Another possibility is to use a new system of equations due to Bona,
+Ledvinka, Palenzuela and Zacek, who extend Einstein's equations by
+introducing additional fields. Of course in order to get a real physical
+solution these fields have to vanish identically. The advantage however is
+that this new system has no more constraint equations, only evolution
+equations. The additional fields, which are closely related to the deviation
+from the constraints in the original theory, obey wave equations, so that it
+is straightforward to devise boundary conditions which prevent such fields
+from entering the computational domain, while at the same time allowing them
+to leave it. In this way one has more control over the constraint
+deviations. I plan to use a combination of these methods to get a more
+stable evolution system.
+
+Finally, I am also interested in working on problems containing matter. For
+example I would like to work on simulations of neutron star binaries or
+binaries containing a black hole and a neutron star. At least in the latter
+case, my experience with mesh refinement may be helpful because of the
+difference in either size or field strength of the two objects.  Also, as
+matter fields often develop shocks the evolution equations should be
+expressed in flux-conservative form. Here my knowledge about symmetric
+hyperbolic evolution may prove useful, as such systems can most easily be
+expressed in flux-conservative form. Another area I am interested in working 
+on in the future is the general relativistic simulation of stellar 
+core collapses, and the formation of neutron stars. 
+In both these areas I see the
+potential for interdisciplinary cooperation with researchers in other areas
+of physics or astronomy.
+
+
+% I will be very excited to join LSU and to become part of one of the
+% strongest Relativity groups in the world, but I think that I will also have
+% an opportunity to develop my own identity at LSU. For example, I would very
+% much enjoy to perhaps lead a small research group of students. Here at Penn
+% State and also back at the Albert-Einstein-Institut, 
+% I have always liked to interact or work with
+% students. Also, I think that my experience with Cactus will help me to
+% easily integrate into the numerical group at LSU. In addition, I am
+% interested to learn more about grid computing, which also makes LSU a
+% natural choice for me.
+
+In closing I would like to remark that I am also open to new ideas
+and willing to work in new areas of research.
+
+
+
+\bigskip
+\bigskip
+\noindent
+\centerline{\bf \large Commitment to Teaching}
+\medskip % \bigskip
+
+\noindent
+{\bf Teaching experience }
+\smallskip
+
+While still at the University of Karlsruhe I was a teaching assistant for
+graduate classes in classical and also quantum mechanics. My main task was
+to highlight important concepts and to explain homework problems on the
+blackboard to graduate students and to prepare solution for homework
+problems. As a physics graduate student at Cornell University I was a
+teaching assistant in many different classes, ranging from General Physics
+classes for non-physics majors to Modern Physics classes for students in the
+honors physics sequence. My main duties were to prepare material for the
+classes I had to teach and to answer any questions the students may have
+had. I also had to prepare and grade weekly or bi-weekly quizzes. In
+addition I had office hours, where the students could ask questions. And of
+course I had to grade exams and homeworks, and write up homework
+solutions. I have also taught so-called Coop sessions where I divided the
+students into groups to work on problems in teams. Similarly, I have taught
+lab sessions where the students had to work on experiments in groups. In
+either case I went from group to group to answer questions, to help, or to
+ask questions myself in order to see if the students understood important
+concepts. Also at Cornell I was a grader in a statistical mechanics class
+taught by Ashcroft. My task was to grade the student's exams and homeworks
+and to write up solutions for the homework problems to be handed out to the
+students. All this has given me a lot of first hand experience on how
+students learn and also on what may prevent them from learning. I am eager
+to apply this experience in the classroom.
+
+
+\medskip
+\noindent
+{\bf Teaching philosophy}
+\smallskip
+
+A good teacher should recognize individual differences among students,
+encourage students to evolve and develop their own ideas, motivate them and
+recognize their progress. In addition to conducting lectures
+and designing labs the teacher should be available for the students during
+office hours. They should feel free and welcome to ask questions and discuss
+matters concerning them.
+
+In teaching it is essential that the students are motivated to
+be curious about the material. Otherwise it is very hard for them to learn.
+In order to motivate students, lectures should be interesting
+and structured such that the students can see that they are making progress.
+It is very important to explain the basic concepts first and to explain them
+well, before embarking on long lectures about calculational methods.
+I think it is better to explain one thing well instead of explaining a lot
+of different things superficially. 
+This way the students better understand the material and
+will be more motivated. Also it is important to pause from time to time to
+give them a chance to ask questions, and if they do not have questions,
+it may be good to ask them a question.
+Another crucial point is to have the lecture well planned. I plan to make
+and hand out notes about everything I wish to cover.
+
+Furthermore it is important to take the educational background of the
+students into account.  Especially their mathematical background should be
+considered in teaching physics. For example if most of the students are not
+familiar with differential equations, it is probably not helpful to use such
+equations, unless there is enough time to thoroughly explain the necessary
+mathematical background.
+
+Assigned homework should be carefully selected to illustrate the concepts or
+calculational methods, explained in lecture. I think homeworks should count
+toward the final grade so that the students are motivated to do them. 
+Nevertheless, I think it is good to not swamp the students with work. 
+The amount of homework should be chosen such that they have time to 
+think and read about the material. Less is sometimes more.
+
+I think that doing experiments in physics is helpful, especially if they are
+fun. The hands-on experience may motivate students. Yet, the experiments
+should be designed such that they only require knowledge of material already
+covered in lecture. I do not think that it is a good idea to introduce new
+concepts in a lab. The students should enjoy doing the experiments, in order
+to motivate them to understand the material. In no case should their time in
+the lab be wasted. Once I saw an experiment in an introductory optics
+class, where the students first had to spend an hour adjusting mirrors and
+lenses in order to see some hydrogen lines. Such experiments are
+demotivating and do not really teach the material they intend to teach.
+
+
+\medskip
+\noindent
+{\bf Teaching interests}
+\smallskip
+
+At the graduate level, I would like to teach classes about General
+Relativity, numerical methods, quantum mechanics or mathematical methods for
+physicists. At the intermediate level I would like to teach classes in
+modern physics, such as about particles and waves, quantum mechanics,
+special relativity or electrodynamics. Of course I am also happy to teach
+any physics class at the introductory level.
+
+
+
+
+
+
+%\clearpage
+
+\bibliographystyle{/usr/share/texmf/bibtex/bst/base/unsrt.bst}
+%\bibliographystyle{/usr/share/texmf/bibtex/bst/base/abbrv.bst}
+%\bibliographystyle{/usr/share/texmf/bibtex/bst/natbib/abbrvnat.bst}
+%\bibliographystyle{apsrev}
+%\bibliographystyle{/usr/share/texmf/tex/latex/revtex/seg.bst}
+%\bibliographystyle{/usr/share/texmf/bibtex/bst/ams/amsplain.bst}
+
+
+\bibliography{references}
+
+
+\end{spacing}
+\end{document}
+
