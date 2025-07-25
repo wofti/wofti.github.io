@@ -22,8 +22,8 @@ cd ~/.ssh
 ssh-keygen
 </PRE>
 <li>   Be sure to set a good passphrase when asked in the step above!!!</li>
-<li>   This makes the files id_rsa.pub and id_rsa</li>
-<li>   id_rsa.pub is the public key, id_rsa is the private key
+<li>   This makes the files id_ed25519.pub and id_ed25519</li>
+<li>   id_ed25519.pub is the public key, id_ed25519 is the private key
 <li>   You can share the public key with anyone, but never share the
        private key
 <li>   The public key can now be stored on the machine where we want to
@@ -32,7 +32,7 @@ ssh-keygen
 <PRE>
 ssh-copy-id athene-login.hpc.fau.edu
 </PRE>
-<li>   Never email the private key id_rsa, keep it safe!</li>
+<li>   Never email the private key id_ed25519, keep it safe!</li>
 </ul>
 
 <HR>
