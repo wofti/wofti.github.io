@@ -31,7 +31,7 @@ that has to be run for each C-file.
 The actual translation happens in 2 stages
 <ul>
 <li>	Preprocessing:<br>
-        gcc first replaces all #include statements in file1.c 
+        gcc first replaces all #include statements in file1.c
         with the contents of the included files (e.g. stdio.h).
         </li>
 <li>	Translating:<br>
@@ -44,7 +44,7 @@ The actual translation happens in 2 stages
 
 After this has been done for every file, all the .o-files have to be linked
 together into a complete program, using e.g.:
-<PRE> 
+<PRE>
 gcc -o program_name file1.o file2.o file3.o ...
 </PRE>
 The latter creates a new executable program called program_name from all
@@ -59,11 +59,11 @@ As there are always many object files, they are often grouped together and
 stored in library files. This is usually done with the object file archiver
 ar. E.g. if we want to put file1.o , file2.o and file3.o in a library file
 named libf123.a , we can use:
-<PRE> 
+<PRE>
 ar rcs libf123.a file1.o file2.o file3.o
 </PRE>
 Once this is done we can create the above program also with:
-<PRE> 
+<PRE>
 gcc -o program_name -L. -lf123 ...
 </PRE>
 The -L argument tells to compiler where to look for libraries. The . in -L.
@@ -94,7 +94,7 @@ usually in the file libgsl.so .
 As far as linking the final program is involved, shared libraries can
 be used in just the same way as static libraries. E.g. if the program
 also needs libgsl.so we would add -lgsl, as in:
-<PRE> 
+<PRE>
 gcc -o program_name -L. -lf123 ... -lgsl
 </PRE>
 The only caveat is that the compiler will look for libgsl.so only in the
@@ -107,19 +107,23 @@ have to add another -L argument to tell it where to look.
 Also, some libraries in turn need other libraries to function. In such cases
 these libraries need to be added as well. E.g. libgsl.so also needs
 libgslcblas.so , so that we really need:
-<PRE> 
+<PRE>
 gcc -o program_name -L. -lf123 ... -lgsl -lgslcblas
 </PRE>
 
 
 <H3>Include files from libraries</H3>
 
-In order to use most libraries we also need to add certain include files
-(e.g. #include <gsl/gsl_odeiv2.h>) to our C-files. Again the compiler
+In order to use most libraries we also need to add certain include files,
+e.g.
+<PRE>
+#include <gsl/gsl_odeiv2.h>
+</PRE>
+to our C-files. Again the compiler
 will look only in certain standard places on its own. Hence often
 you have to add a -I argument to the translation stage (where include files
 are processed) to tell the compiler the directory in which is should look
-for include files. If e.g. file1.c includes gsl/gsl_odeiv2.h and 
+for include files. If e.g. file1.c includes gsl/gsl_odeiv2.h and
 gsl/gsl_odeiv2.h is in directory /usr/include, we need:
 <PRE>
 gcc -I/usr/include -c file1.c
