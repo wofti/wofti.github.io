@@ -117,7 +117,7 @@ gcc -o program_name -L. -lf123 ... -lgsl -lgslcblas
 In order to use most libraries we also need to add certain include files,
 e.g.
 <PRE>
-#include <gsl/gsl_odeiv2.h>
+#include &lt;gsl/gsl_odeiv2.h&gt;
 </PRE>
 to our C-files. Again the compiler
 will look only in certain standard places on its own. Hence often
@@ -129,6 +129,46 @@ gsl/gsl_odeiv2.h is in directory /usr/include, we need:
 gcc -I/usr/include -c file1.c
 </PRE>
 
+
+<H3>Compiling Sgrid, Nmesh or BAM</H3>
+
+Both Sgrid and Nmesh and also BAM use GNU Make to issue the necessary
+compiler commands. Thus in principle it suffices to just use make to
+compile these programs, e.g. we can simply type:
+<PRE>
+cd sgrid
+make
+</PRE>
+
+However, since Sgrid needs certain libraries, the compiler often needs to
+know various arguments to find these libraries and their include files, i.e.
+the -L and -I arguments. And of course it also needs the various -l
+arguments to tell it which libraries we want to link in.
+
+To keep this reasonably simple, all 3 programs contain a MyConfig file that
+sets a couple of variables that are passed on to the compiler.
+The main variables to use external libraries are
+SPECIALLIBS and SPECIALINCS.
+E.g.
+<PRE>
+SPECIALINCS += -I/usr/include
+SPECIALLIBS += -L/usr/lib/x86_64-linux-gnu -lgsl -lgslcblas
+</PRE>
+would tell the compiler to look for include files in /usr/include and to
+link in the libraries gsl and gslcblas and to look for them in
+/usr/lib/x86_64-linux-gnu .
+
+<P>
+
+In Sgrid the above 2 lines are usually accompanied by
+<PRE>
+DFLAGS += -DGSL
+</PRE>
+This line adds -DGSL to the variable DFLAGS,
+which is also passed on to the compiler. It causes the compiler to
+add a "#define GSL 1" to the C-files. This is useful as some parts in
+Sgrid check (with "#ifdef GSL") whether GSL function calls should actually
+be used.
 
 
 </BODY>
