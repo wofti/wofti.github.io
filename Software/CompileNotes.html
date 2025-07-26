@@ -22,7 +22,7 @@ Most computer programs are spread out over many files. The compiler has to
 thus translate every file into machine language and later link them together
 into a single executable program that the user can launch.
 
-In the case of a C compiler like gcc, translation is effected by a command
+In the case of a C-compiler like gcc, translation is effected by a command
 like
 <PRE>
 gcc -c file1.c
@@ -40,6 +40,8 @@ The actual translation happens in 2 stages
         </li>
 </ul>
 
+<P>
+
 After this has been done for every file, all the .o-files have to be linked
 together into a complete program, using e.g.:
 <PRE> 
@@ -47,7 +49,7 @@ gcc -o program_name file1.o file2.o file3.o ...
 </PRE>
 The latter creates a new executable program called program_name from all
 listed object files and the standard C-libraries. The standard C-libraries
-are collections of object files, the contain standard C-functions
+are collections of object files, that contain standard C-functions
 such as printf.
 
 
@@ -69,11 +71,15 @@ means look in the current directory. The argument -lf123 means link in
 library f123. The compiler is smart enough to expect the f123 library to
 be in file libf123.a .
 
+<P>
+
 These kinds of libraries (which conventionally end in .a) are called static
 libraries. The intent is that they are added to the final program (here
 program_name). If the library is big, the program will be big as well. If
 many programs use the same big library they all will contain the same
 big library, thus taking up space multiple times.
+
+<P>
 
 Besides static libraries there are also so called shared libraries. Shared
 libraries are not included in the program, but instead loaded into memory at
@@ -82,6 +88,8 @@ library only once into memory, even if several programs need it. For this
 reason most widely used libraries, such as e.g. the GSL, exist in the form
 of shared libraries. Their file names end in .so , e.g. the GSL library is
 usually in the file libgsl.so .
+
+<P>
 
 As far as linking the final program is involved, shared libraries can
 be used in just the same way as static libraries. E.g. if the program
@@ -93,6 +101,8 @@ The only caveat is that the compiler will look for libgsl.so only in the
 directories specified by -L and also in some operating system depended
 places. So if libgsl.so is not in a standard directory, you will likely
 have to add another -L argument to tell it where to look.
+
+<P>
 
 Also, some libraries in turn need other libraries to function. In such cases
 these libraries need to be added as well. E.g. libgsl.so also needs
