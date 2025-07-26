@@ -1,0 +1,121 @@
+<HTML>
+<HEAD>
+<TITLE>Compiling Programs</TITLE>
+</HEAD>
+
+<!--
+<BODY BGCOLOR="#C0C0C0" TEXT="#000000">
+-->
+<BODY BGCOLOR="#000000" TEXT="#bba400"
+link="ccddff" vlink="cc0000" alink="ffffff">
+
+
+<A HREF="../index.html"><H1>Wolfgang Tichy</H1> </A>
+
+<HR>
+
+<H2>About compiling programs</H2>
+
+<H3>Compiler basics</H3>
+
+Most computer programs are spread out over many files. The compiler has to
+thus translate every file into machine language and later link them together
+into a single executable program that the user can launch.
+
+In the case of a C compiler like gcc, translation is effected by a command
+like
+<PRE>
+gcc -c file1.c
+</PRE>
+that has to be run for each C-file.
+The actual translation happens in 2 stages
+<ul>
+<li>	Preprocessing:<br>
+        gcc first replaces all #include statements in file1.c 
+        with the contents of the included files (e.g. stdio.h).
+        </li>
+<li>	Translating:<br>
+        gcc then translates the result into machine language, and saves the
+        machine language result in file1.o , a so called object file.
+        </li>
+</ul>
+
+After this has been done for every file, all the .o-files have to be linked
+together into a complete program, using e.g.:
+<PRE> 
+gcc -o program_name file1.o file2.o file3.o ...
+</PRE>
+The latter creates a new executable program called program_name from all
+listed object files and the standard C-libraries. The standard C-libraries
+are collections of object files, the contain standard C-functions
+such as printf.
+
+
+<H3>Libraries</H3>
+
+As there are always many object files, they are often grouped together and
+stored in library files. This is usually done with the object file archiver
+ar. E.g. if we want to put file1.o , file2.o and file3.o in a library file
+named libf123.a , we can use:
+<PRE> 
+ar rcs libf123.a file1.o file2.o file3.o
+</PRE>
+Once this is done we can create the above program also with:
+<PRE> 
+gcc -o program_name -L. -lf123 ...
+</PRE>
+The -L argument tells to compiler where to look for libraries. The . in -L.
+means look in the current directory. The argument -lf123 means link in
+library f123. The compiler is smart enough to expect the f123 library to
+be in file libf123.a .
+
+These kinds of libraries (which conventionally end in .a) are called static
+libraries. The intent is that they are added to the final program (here
+program_name). If the library is big, the program will be big as well. If
+many programs use the same big library they all will contain the same
+big library, thus taking up space multiple times.
+
+Besides static libraries there are also so called shared libraries. Shared
+libraries are not included in the program, but instead loaded into memory at
+program start. This loader is so sophisticated that it will load each
+library only once into memory, even if several programs need it. For this
+reason most widely used libraries, such as e.g. the GSL, exist in the form
+of shared libraries. Their file names end in .so , e.g. the GSL library is
+usually in the file libgsl.so .
+
+As far as linking the final program is involved, shared libraries can
+be used in just the same way as static libraries. E.g. if the program
+also needs libgsl.so we would add -lgsl, as in:
+<PRE> 
+gcc -o program_name -L. -lf123 ... -lgsl
+</PRE>
+The only caveat is that the compiler will look for libgsl.so only in the
+directories specified by -L and also in some operating system depended
+places. So if libgsl.so is not in a standard directory, you will likely
+have to add another -L argument to tell it where to look.
+
+Also, some libraries in turn need other libraries to function. In such cases
+these libraries need to be added as well. E.g. libgsl.so also needs
+libgslcblas.so , so that we really need:
+<PRE> 
+gcc -o program_name -L. -lf123 ... -lgsl -lgslcblas
+</PRE>
+
+
+<H3>Include files from libraries</H3>
+
+In order to use most libraries we also need to add certain include files
+(e.g. #include <gsl/gsl_odeiv2.h>) to our C-files. Again the compiler
+will look only in certain standard places on its own. Hence often
+you have to add a -I argument to the translation stage (where include files
+are processed) to tell the compiler the directory in which is should look
+for include files. If e.g. file1.c includes gsl/gsl_odeiv2.h and 
+gsl/gsl_odeiv2.h is in directory /usr/include, we need:
+<PRE>
+gcc -I/usr/include -c file1.c
+</PRE>
+
+
+
+</BODY>
+<HTML>
