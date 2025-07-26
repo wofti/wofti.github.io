@@ -105,6 +105,10 @@ data, with e.g. the data reader in BAM, Cactus or Nmesh, all these lines can
 be commented out, because none of these libraries are needed.
 
 <P>
+<!--
+See ??? for notes on compiling on supercomputers such as FAU's Athene.
+<P>
+-->
 
 There are now 2 versions of neutron star initial data in Sgrid.
 The old private one is called BNSdata and the new public one DNSdata. 
@@ -131,17 +135,22 @@ sgrid/src/Projects/DNSdata/ParFiles/Note.txt .
 
 
 <HR>
-<H2>Running Sgrid and BAM</H2>
+<H2>Running Sgrid</H2>
 
 Sgrid only uses OpenMP, not MPI, so do not run it with mpirun. Just launch
 it on a machine with multiple CPU cores.
 
-On Koko, Sgrid and also BAM can also be started with the 
+On Athene, Sgrid and also BAM or Nmesh can also be started with the
 <A HREF="https://github.com/wofti/WTscripts/blob/main/submitjob">submitjob</A>
 script found at
 <A HREF="https://github.com/wofti/WTscripts">https://github.com/wofti/WTscripts</A>.
 For slurm you also need
 <A HREF="https://github.com/wofti/WTscripts/blob/main/slurm_mpirun_script">slurm_mpirun_script</A>.
+NOTE, since Sgrid does not use MPI, the first 2 arguments need to be
+serial and 1 as in:
+</PRE>
+submitjob serial 1 other_submitjob_args
+</PRE>
 
 
 <HR>
