@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Important Libraries</TITLE>
+</HEAD>
+
+<!--
+<BODY BGCOLOR="#C0C0C0" TEXT="#000000">
+-->
+<BODY BGCOLOR="#000000" TEXT="#bba400"
+link="ccddff" vlink="cc0000" alink="ffffff">
+
+
+<A HREF="../index.html"><H1>Wolfgang Tichy</H1> </A>
+
+<HR>
+
+<H2>Important libraries</H2>
+
+<H3>BLAS and LAPACK</H3>
+
+BLAS contains functions for common linear algebra operations such as vector
+addition, scalar multiplication, dot products, linear combinations, and
+matrix multiplication. 
+
+<P>
+
+LAPACK relies on BLAS to provide more complicated linear algebra routines
+for e.g. solving systems of linear equations and linear least squares,
+eigenvalue problems, or matrix factorizations such as LU.
+
+<P>
+
+Many different implementations of BLAS and LAPACK exist. A commonly used one
+is OpenBLAS, which contains both BLAS and LAPACK in one library file. I.e.
+if one uses OpenBLAS it suffices to add
+<PRE>
+-lopenblas
+</PRE>
+to link in support for both BLAS and LAPACK functions.
+
+<P>
+
+In other implementations BLAS and LAPACK are in separate libraries and then
+one usually adds
+<PRE>
+-lblas -llapack
+</PRE>
+to link in support for BLAS and LAPACK functions.
+
+
+
+<H2>Using libraries on supercomputers</H2>
+
+As explained in the
+<A HREF="../../Software/CompileNotes.html">Compile Notes</A>
+one often also needs to specify the exact directories where the libraries
+and their include files reside (i.e. the -L and -I options).
+If there are several versions of each library, this can get tedious very
+quickly. For this reason many supercomputers have a module system, that can
+be used to set up the default search locations for the compiler.
+E.g. in order to link with OpenBLAS one would simply type
+<PRE>
+module load openblas
+</PRE>
+before compiling. Then the -L and -I options do not need to be given, and
+configurations such as MyConfig simplify.
+
+<P>
+
+Unfortunately on FAU's Athene supercomputer some of these modules are broken
+so that one still may need to specify some -L and -I options anyway.
+
+
+
+</BODY>
+<HTML>
