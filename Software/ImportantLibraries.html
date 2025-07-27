@@ -67,7 +67,30 @@ configurations such as MyConfig simplify.
 
 <P>
 
-Unfortunately on FAU's Athene supercomputer some of these modules are broken
+This works because the module system will set the environment variables
+LIBRARY_PATH and CPATH that the gcc compiler uses (if no -L or -I are given)
+to search for libraries and include files. You can verify that they have
+been set with:
+<PRE>
+echo $LIBRARY_PATH
+echo $CPATH
+</PRE>
+
+The module system should also set the environment variable
+LD_LIBRARY_PATH. LD_LIBRARY_PATH is not directly used by the compiler.
+Rather it is used at program start to find all shared libraries that the
+program needs. Check it with:
+<PRE>
+echo $LD_LIBRARY_PATH
+</PRE>
+If only LD_LIBRARY_PATH is wrong, the compilation will succeed, but when
+you start the compiled program, you may get "error while loading shared
+libraries".
+
+<P>
+
+Unfortunately, on FAU's Athene supercomputer some of these modules are
+broken in the sense that they do not set all required environment variables,
 so that one still may need to specify some -L and -I options anyway.
 
 
