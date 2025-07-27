@@ -98,7 +98,7 @@ also needs libgsl.so we would add -lgsl, as in:
 gcc -o program_name -L. -lf123 ... -lgsl
 </PRE>
 The only caveat is that the compiler will look for libgsl.so only in the
-directories specified by -L and also in some operating system depended
+directories specified by -L and also in some operating system dependent
 places. So if libgsl.so is not in a standard directory, you will likely
 have to add another -L argument to tell it where to look.
 
@@ -122,7 +122,7 @@ e.g.
 to our C-files. Again the compiler
 will look only in certain standard places on its own. Hence often
 you have to add a -I argument to the translation stage (where include files
-are processed) to tell the compiler the directory in which is should look
+are processed) to tell the compiler the directory in which it should look
 for include files. If e.g. file1.c includes gsl/gsl_odeiv2.h and
 gsl/gsl_odeiv2.h is in directory /usr/include, we need:
 <PRE>
@@ -140,8 +140,8 @@ cd sgrid
 make
 </PRE>
 
-However, since Sgrid needs certain libraries, the compiler often needs to
-know various arguments to find these libraries and their include files, i.e.
+However, since Sgrid needs certain libraries, the compiler often needs to be
+given various arguments to find these libraries and their include files, i.e.
 the -L and -I arguments. And of course it also needs the various -l
 arguments to tell it which libraries we want to link in.
 
