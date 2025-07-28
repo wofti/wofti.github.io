@@ -98,7 +98,7 @@ For some libraries we can find out these options using pkg-config. E.g.
 pkg-config --libs openblas
 pkg-config --cflags openblas
 </PRE>
-tells us the locations for openblas. When pkg-config works on Athene,
+should tell us the locations for openblas. When pkg-config works on Athene,
 we can even use
 <PRE>
 SPECIALLIBS += $(shell pkg-config --libs openblas)
