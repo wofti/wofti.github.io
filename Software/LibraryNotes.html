@@ -93,6 +93,19 @@ Unfortunately, on FAU's Athene supercomputer some of these modules are
 broken in the sense that they do not set all required environment variables,
 so that one still may need to specify some -L and -I options anyway.
 
+For some libraries we can find out these options using pkg-config. E.g.
+<PRE>
+pkg-config --libs openblas
+pkg-config --cflags openblas
+</PRE>
+tells us the locations for openblas. When pkg-config works on Athene,
+we can even use
+<PRE>
+SPECIALLIBS += $(shell pkg-config --libs openblas)
+</PRE>
+directly in the MyConfig. But on Athene you never know if a module sets up
+the environment variables that pkg-config needs, so that pkg-config may fail
+as well.
 
 
 </BODY>
