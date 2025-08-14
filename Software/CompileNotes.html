@@ -71,6 +71,15 @@ means look in the current directory. The argument -lf123 means link in
 library f123. The compiler is smart enough to expect the f123 library to
 be in file libf123.a .
 
+Instead of specifying the file location and file name of a library with the
+-L and -l options, one can also simply specify the full filename, e.g.:
+<PRE>
+gcc -o program_name mydir/libf123.a ...
+</PRE>
+This form can be advantageous if one wants to ensure that one very specific
+library is used. It avoids any search by the compiler across all the
+different locations specified by possibly multiple -L options.
+
 <P>
 
 These kinds of libraries (which conventionally end in .a) are called static
