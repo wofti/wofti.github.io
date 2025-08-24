@@ -20,7 +20,7 @@ link="ccddff" vlink="cc0000" alink="ffffff">
 
 BLAS contains functions for common linear algebra operations such as vector
 addition, scalar multiplication, dot products, linear combinations, and
-matrix multiplication. 
+matrix multiplication.
 
 <P>
 
@@ -48,6 +48,41 @@ one usually adds
 to link in support for BLAS and LAPACK functions.
 
 
+<H3>GSL</H3>
+
+The GNU Scientific Library (GSL) is a numerical library. To use it, one can
+add
+<PRE>
+-lgsl -lgslcblas
+</PRE>
+In this form it uses the BLAS implementation gslcblas, provided by the GSL
+itself. However, since gslcblas is not optimized very well, it is better
+to use something like
+<PRE>
+-lgsl -lopenblas
+</PRE>
+Then it uses the faster OpenBLAS library.
+
+
+<H3>UMFPACK</H3>
+
+UMFPACK is a very fast library for finding to LU-decomposition of sparse
+matrices. To function it also needs the AMD library, as well as BLAS. I.e.
+to compile with UMFPACK we one needs e.g.:
+<PRE>
+-lumfpack -lamd -lopenblas
+</PRE>
+Both UMFPACK and AMD are part of the very large
+<A HREF="https://github.com/DrTimothyAldenDavis/SuiteSparse/releases">
+SuiteSparse</A> package.
+However, if you only need UMFPACK (and AMD) you can
+also compile it yourself by following the instructions in
+<A HREF="https://github.com/wofti/Packages/blob/main/forUMFPACK/Note.txt">
+Packages/forUMFPACK/Note.txt</A>.
+
+
+
+<HR>
 
 <H2>Using libraries on supercomputers</H2>
 
