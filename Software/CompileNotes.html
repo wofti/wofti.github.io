@@ -114,8 +114,9 @@ have to add another -L argument to tell it where to look.
 <P>
 
 Also, some libraries in turn need other libraries to function. In such cases
-these libraries need to be added as well. E.g. libgsl.so also needs
-libgslcblas.so , so that we really need:
+these libraries need to be added as well. E.g. libgsl.so also needs BLAS
+(a non-optimized version of which is e.g. in libgslcblas.so),
+so that we really need something like:
 <PRE>
 gcc -o program_name -L. -lf123 ... -lgsl -lgslcblas
 </PRE>
