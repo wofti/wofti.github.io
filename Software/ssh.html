@@ -30,7 +30,7 @@ ssh-keygen
        log in without password</li>
 <li>   Copy it to e.g. athene-login.hpc.fau.edu by using</li>
 <PRE>
-ssh-copy-id athene-login.hpc.fau.edu
+ssh-copy-id username@athene-login.hpc.fau.edu
 </PRE>
 <li>   Never email the private key id_ed25519, keep it safe!</li>
 </ul>
@@ -108,7 +108,7 @@ add-key.py this is even quite easy. There is, however, an even better way!
 Just use ssh-agent or add-key.py on your local computer (e.g. your laptop),
 and then forward this ssh-agent to any remote machine you log in. E.g.:
 <PRE>
-ssh -A athene-login.hpc.fau.edu
+ssh -A username@athene-login.hpc.fau.edu
 </PRE>
 will allow you to use all your local keys on the remote
 athene-login.hpc.fau.edu .
