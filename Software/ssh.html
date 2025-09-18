@@ -11,6 +11,13 @@ link="ccddff" vlink="cc0000" alink="ffffff">
 
 
 <A HREF="../index.html"><H1>Wolfgang Tichy</H1> </A>
+<HR>
+
+<a href="https://en.wikipedia.org/wiki/Secure_Shell">ssh</a>
+is a way to establish remote connections to access other computers or the
+data on them. E.g. git can clone or pull via ssh, or you can log into
+other computers via ssh. For authentication one can use a password, but ssh
+keys are more secure and also more convenient.
 
 <HR>
 <H2>ssh keys</H2>
@@ -106,27 +113,31 @@ eval `add-key.py path_to_private_key_on_local_client`
 <HR>
 <H2>Agent forwarding</H2>
 
-You can run an ssh-agent on every computer that you log in, and with
-add-key.py this is even quite easy. There is, however, an even better way!
-Just use ssh-agent or add-key.py on your local computer (e.g. your laptop),
-and then forward this ssh-agent to any remote machine you log in. E.g.:
+<ul>
+<li>  You can run an ssh-agent on every computer that you log in, and with
+      add-key.py this is even quite easy.</li>
+<li>  However, there is an even better way!</li>
+<li>  Just use ssh-agent or add-key.py on your local computer
+      (e.g. your laptop), and then forward this ssh-agent to any remote
+      machine you log in. E.g.:
 <PRE>
 ssh -A username@athene-login.hpc.fau.edu
 </PRE>
-will allow you to use all your local keys on the remote
-athene-login.hpc.fau.edu .
+      will allow you to use all your local keys on the remote
+      athene-login.hpc.fau.edu .</li>
 
-If you do not want to type the -A each time, you can add
+<li>  If you do not want to type the -A each time, you can add
 <PRE>
 Host athene-login.hpc.fau.edu
   ForwardAgent yes
 </PRE>
-or
+      or
 <PRE>
 Host *.fau.edu
   ForwardAgent yes
 </PRE>
-to the .ssh/config file on your local computer.
+      to the .ssh/config file on your local computer.</li>
+</ul>
 
 
 </BODY>
