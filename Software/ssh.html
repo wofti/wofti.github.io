@@ -73,8 +73,9 @@ eval `ssh-agent`
 <PRE>
 ssh-add path_to_private_key_on_local_client
 </PRE>
-<li>  This will ask for your passphrase, but then remembers it for
-      later. This way you don't have to enter it all the time.</li>
+<li>  This will ask for your passphrase to decrypt your key. The agent
+      then remembers the decrypted key for later use.
+      This way you don't have to enter your passphrase all the time.</li>
 <li>  The
 <a href="https://github.com/wofti/WTscripts">add-key.py</a> script in
 <a href="https://github.com/wofti/WTscripts">https://github.com/wofti/WTscripts</a>
