@@ -66,13 +66,14 @@ SPECIALLIBS += -lumfpack -lamd -lblas
 The DFLAGS line says that we want to use the UMFPACK 
 library. The SPECIALLIBS lines after that simply describe what
 libraries we want to compile in for that. Of course this only works if they
-are actually installed. To install them either download
+are actually installed. To install them either download and compile
 <A HREF="https://github.com/DrTimothyAldenDavis/SuiteSparse/releases">
-SuiteSparse</A>
-yourself, or follow
+SuiteSparse</A> (which among many other things contains UMFPACK and AMD),
+or follow
 <A HREF="https://github.com/wofti/Packages/blob/main/forUMFPACK/Note.txt">
-Packages/forUMFPACK/Note.txt</A>,
-or if you are e.g. on Debian Linux just install
+Packages/forUMFPACK/Note.txt</A> to compile only UMFPACK and AMD.
+If you are on Linux you can also just install the develepment version
+of SuiteSparse with your package manager, e.g. on Debian Linux just install
 the package libsuitesparse-dev.
 <P>
 
@@ -100,10 +101,17 @@ SPECIALLIBS += -lgsl -lgslcblas
 
 In order to make new initial data for binary neutron stars we need the GSL
 and both UMFPACK and TEMPLATES. In this case the lapack and blas libraries
-also need to be installed. But if we just need to read in already created
-data, with e.g. the data reader in BAM, Cactus or Nmesh, all these lines can
-be commented out, because none of these libraries are needed.
+also need to be installed. An example MyConfig for this case is in
+<A HREF="https://github.com/sgridsource/sgrid/blob/master/doc/MyConfig.example">
+sgrid/doc/MyConfig.example</A>.
 
+Yet, if we just need to read in already created data, with e.g. the initial
+data reader in Athena++, BAM, Cactus or Nmesh, all the DFLAGS and
+SPECIALLIBS lines shown above can be commented out, because none of these
+libraries are needed. In this case one probaly wants to use the Sgrid
+library, which can be built using the simpilfied
+<A HREF="https://github.com/sgridsource/sgrid/blob/master/doc/MyConfig.DNSlibsgrid">
+sgrid/doc/MyConfig.DNSlibsgrid</A>.
 <P>
 
 See
@@ -116,13 +124,14 @@ to find out more about compiling on supercomputers such as FAU's Athene.
 
 <P>
 
+<!--
 There are now 2 versions of neutron star initial data in Sgrid.
 The old private one is called BNSdata and the new public one DNSdata.
 The new DNSdata can create higher mass and spin configurations, and
 may also run faster. So it should be preferred. Note that DNSdata also
 requires the project EoS_T0.
-
 <P>
+-->
 
 
 
@@ -136,7 +145,7 @@ reduction. The parfiles are described in
 <A HREF="../EccRed/sgrid-parfiles/Note.txt">../EccRed/sgrid-parfiles/Note.txt</A>.
 -->
 Several example parfiles are in
-sgrid/src/Projects/DNSdata/ParFiles , with description (to some extent) in
+sgrid/src/Projects/DNSdata/ParFiles , with descriptions in
 sgrid/src/Projects/DNSdata/ParFiles/Note.txt .
 
 
