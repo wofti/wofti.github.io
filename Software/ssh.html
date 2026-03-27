@@ -84,6 +84,27 @@ ssh-add path_to_private_key_on_local_client
 
 
 <HR>
+<H2>Using systemctl to connect to a running ssh-agent</H2>
+
+<ul>
+<li>  On a modern Linux OS an ssh-agent may already be running, so that
+      it is unnecessary to start another one.</li>
+<li>  But if you log in via ssh this agent my not show up (because the
+      envoironment variable SSH_AUTH_SOCK is not set) when you just
+      type:</li>
+<PRE>
+ssh-add -l
+</PRE>
+<li>  In this case it is often useful to use systemctl to set SSH_AUTH_SOCK
+      in the following way:</li>
+<PRE>
+export $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+ssh-add -l
+</PRE>
+</ul>
+
+
+<HR>
 <H2>Using
 <a href="https://github.com/wofti/WTscripts">add-key.py</a>
 for your keys</H2>
