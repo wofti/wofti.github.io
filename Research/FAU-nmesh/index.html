@@ -32,23 +32,6 @@ make git_clone
 </PRE>
 
 
-
-<HR>
-<H2>Getting and compiling the TEMPLATES library needed for nmesh</H2>
-
-Type:
-<PRE>
-git clone https://github.com/wofti/Packages.git
-</PRE>
-
-<P>
-Type:
-<PRE>
-cd Packages/dctemplates_extBlasLapack
-make
-</PRE>
-
-
 <HR>
 <H2>Compiling Nmesh</H2>
 
@@ -58,61 +41,13 @@ certain libraries are located. The file linked here is an example that
 works on Debian.
 Among other things it has the section:
 <PRE>
-DFLAGS += -DUMFPACK
-SPECIALINCS += -I/usr/include/suitesparse
-SPECIALLIBS += -lumfpack -lamd -lblas
+#SPECIALLIBS += -lgsl -lgslcblas  # for GSL
 </PRE>
 <P>
-The DFLAGS line says that we want to use the UMFPACK 
-library. The SPECIALLIBS lines after that simply describe what
-libraries we want to compile in for that. Of course this only works if they
-are actually installed. To install them either download and compile
-<A HREF="https://github.com/DrTimothyAldenDavis/SuiteSparse/releases">
-SuiteSparse</A> (which among many other things contains UMFPACK and AMD),
-or follow
-<A HREF="https://github.com/wofti/Packages/blob/main/forUMFPACK/Note.txt">
-Packages/forUMFPACK/Note.txt</A> to compile only UMFPACK and AMD.
-If you are on Linux you can also just install the develepment version
-of SuiteSparse with your package manager, e.g. on Debian Linux just install
-the package libsuitesparse-dev.
-<P>
-
-There is also the section:
-<PRE>
-DFLAGS += -DTEMPLATES
-TEMPLATESDIR = /home/wolf/Packages/dctemplates_extBlasLapack
-SPECIALLIBS += -L$(TEMPLATESDIR) -literatortemplates
-SPECIALLIBS += -lblas -llapack
-</PRE>
-
-The DFLAGS line says that we want to use the TEMPLATES library. The lines
-after that describe where this library is, and what libraries we want to
-compile in. The TEMPLATES library needs to be first downloaded, and then
-compiled (see above).
-<P>
-
-Similary we need the GSL library:
-<PRE>
-DFLAGS += -DGSL
-SPECIALLIBS += -lgsl -lgslcblas
-</PRE>
-<P>
-
-
-In order to make new initial data for binary neutron stars we need the GSL
-and both UMFPACK and TEMPLATES. In this case the lapack and blas libraries
-also need to be installed. An example MyConfig for this case is in
-<A HREF="https://github.com/nmeshsource/nmesh/blob/master/doc/MyConfig.example">
-nmesh/doc/MyConfig.example</A>.
-
-Yet, if we just need to read in already created data, with e.g. the initial
-data reader in Athena++, BAM, Cactus or Nmesh, all the DFLAGS and
-SPECIALLIBS lines shown above can be commented out, because none of these
-libraries are needed. In this case one probaly wants to use the Nmesh
-library, which can be built using the simpilfied
-<A HREF="https://github.com/nmeshsource/nmesh/blob/master/doc/MyConfig.DNSlibnmesh">
-nmesh/doc/MyConfig.DNSlibnmesh</A>.
-<P>
+This line is currently commented out, but any
+SPECIALLIBS lines simply describe what
+libraries we want to compile in. Of course this only works if they
+are actually installed.
 
 See
 <A HREF="../../Software/CompileNotes.html">Compile Notes</A>
@@ -124,17 +59,6 @@ to find out more about compiling on supercomputers such as FAU's Athene.
 
 <P>
 
-<!--
-There are now 2 versions of neutron star initial data in Nmesh.
-The old private one is called BNSdata and the new public one DNSdata.
-The new DNSdata can create higher mass and spin configurations, and
-may also run faster. So it should be preferred. Note that DNSdata also
-requires the project EoS_T0.
-<P>
--->
-
-
-
 <HR>
 <H2>Parameter files for Nmesh</H2>
 <!--
@@ -145,27 +69,21 @@ reduction. The parfiles are described in
 <A HREF="../EccRed/nmesh-parfiles/Note.txt">../EccRed/nmesh-parfiles/Note.txt</A>.
 -->
 Several example parfiles are in
-nmesh/src/Projects/DNSdata/ParFiles , with descriptions in
-nmesh/src/Projects/DNSdata/ParFiles/Note.txt .
+nmesh/src/tests/scalarwave1/parfiles , with descriptions in
+nmesh/src/tests/scalarwave1/parfiles/Note.txt .
 
 
 <HR>
 <H2>Running Nmesh</H2>
 
-Nmesh only uses OpenMP, not MPI, so do not run it with mpirun. Just launch
-it on a machine with multiple CPU cores.
+Nmesh can use MPI, so you can compile and run with mpicc and mpirun.
 
-On Athene, Nmesh and also BAM or Nmesh can also be started with the
+On Athene, Nmesh and also BAM or Sgrid can also be started with the
 <A HREF="https://github.com/wofti/WTscripts/blob/main/submitjob">submitjob</A>
 script found at
 <A HREF="https://github.com/wofti/WTscripts">https://github.com/wofti/WTscripts</A>.
 For slurm you also need
 <A HREF="https://github.com/wofti/WTscripts/blob/main/slurm_mpirun_script">slurm_mpirun_script</A>.
-NOTE, since Nmesh does not use MPI, the first 2 arguments need to be
-serial and 1 as in:
-</PRE>
-submitjob serial 1 other_submitjob_args
-</PRE>
 
 
 <HR>

@@ -1,0 +1,53 @@
+# MyConfig
+#
+# The file MyConfig is included verbatim in the Makefile to determine which
+# modules (or libraries) will be included in the build.
+
+# ------------------------------------------------------------------------
+# Here are simple examples for modules, they may be mutually exclusive.
+# modules we add:
+
+# compile test modules from main part of nmesh:
+libpaths += src/tests/advection1
+libpaths += src/tests/scalarwave1
+
+## add and compile modules from nmesh-projects repo:
+#repo = giter@quark.physics.fau.edu:nmesh-projects
+#projects += $(repo)/ScalarWave
+
+# ------------------------------------------------------------------------
+# override various options in the Makefile
+
+# name and directory for the executable
+EXEC = nmesh
+EXECDIR = $(TOP)/exe
+
+# pick a C compiler, e.g. just cc or gcc or mpicc
+CC = gcc
+
+# optimization flags, say -O, -O2, -g for debugging, -pg for profiling, ...
+OFLAGS = -std=c99 -g # -O3 # -fopenmp # -g # -Wall -Werror
+
+# use OpenMP pragmas, this also needs something like -fopenmp in OFLAGS
+#DFLAGS += -DUSEOMP
+
+# use MPI, only  DFLAGS += -DUSEMPI  is needed with mpicc
+#DFLAGS += -DUSEMPI
+## This works on Debian 10 with openmpi, but is not needed with mpicc:
+#MPIDIR = /usr/lib/x86_64-linux-gnu/openmpi
+#MPIDIRL = -L$(MPIDIR)/lib
+#MPIDIRI = -I$(MPIDIR)/include
+#MPILIBS = -lmpi
+
+# other libraries needed, in some cases we need even -lrt for clock_gettime
+#SPECIALLIBS += -lgsl -lgslcblas  # for GSL
+#SPECIALLIBS += -lrt
+
+# on UNIX without ru_maxrss in struct rusage (in getrusage), uncomment
+#DFLAGS += -DNO_RU_MAXRSS
+
+# on old compilers without NORET=_Noreturn, uncomment the line below
+#DFLAGS += -DNO_C11
+
+# generate SIGFPE on NANs, works only on GNU, BSD or similar systems
+#DFLAGS += -D_GNU_SOURCE -DFPEEXCEPTIONS="FE_INVALID|FE_DIVBYZERO|FE_OVERFLOW"
