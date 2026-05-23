@@ -112,19 +112,30 @@ configurations such as MyConfig simplify.
 
 <P>
 
-This works because the module system will set the environment variables
-LIBRARY_PATH and CPATH that the gcc compiler uses (if no -L or -I are given)
-to search for libraries and include files. You can verify that they have
-been set with:
+This works because the module system will do one of two things:
+<ul>
+<li>
+It can change your PATH environment variable, so that each time you enter
+gcc it will actually run a wrapper script instead. This wrapper script then
+inserts all the -L and -I options needed when it launches the real gcc.
+</li>
+<li>
+Or it can set the environment variables LIBRARY_PATH and CPATH that the gcc
+compiler uses (if no -L or -I are given) to search for libraries and include
+files.
+</li>
+</ul>
+
+You can verify if LIBRARY_PATH and CPATH have been set with:
 <PRE>
 echo $LIBRARY_PATH
 echo $CPATH
 </PRE>
 
-The module system should also set the environment variable
-LD_LIBRARY_PATH. LD_LIBRARY_PATH is not directly used by the compiler.
-Rather it is used at program start to find all shared libraries that the
-program needs. Check it with:
+If the module system sets LIBRARY_PATH and CPATH, it should also set the
+environment variable LD_LIBRARY_PATH. LD_LIBRARY_PATH is not directly used
+by the compiler. Rather it is used at program start to find and load all
+shared libraries that the program needs. Check it with:
 <PRE>
 echo $LD_LIBRARY_PATH
 </PRE>
@@ -133,6 +144,9 @@ you start the compiled program, you may get "error while loading shared
 libraries".
 
 <P>
+
+
+<H3>Problems on Athene</H3>
 
 Unfortunately, on FAU's Athene supercomputer some of these modules are
 broken in the sense that they do not set all required environment variables,
