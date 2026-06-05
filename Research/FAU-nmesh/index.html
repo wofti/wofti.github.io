@@ -21,11 +21,25 @@ type:
 <PRE>
 git clone https://github.com/nmeshsource/nmesh.git
 </PRE>
-Copy the file <A HREF="MyConfig">MyConfig</A> into the newly created nmesh
-directory.
+
+Read the file nmesh/doc/nmesh.txt to understand better how nmesh works.
+You will learn that what modules are used and compiled, is specified in
+a file called <b>MyConfig</b>.
+<P>
+
+For a minimal configuration, copy the file
+<A HREF="MyConfig">MyConfig</A>
+into the newly created nmesh directory.
+<P>
+
+For a fuller configuration example using some modules from the non-public
+git repos of the FAU NR group type:
+<PRE>
+cp nmesh/configs/Debian-DNSdata/MyConfig nmesh
+</PRE>
 
 <P>
-Type:
+After choosing you <b>MyConfig</b>, type:
 <PRE>
 cd nmesh
 make git_clone
@@ -35,8 +49,9 @@ make git_clone
 <HR>
 <H2>Compiling Nmesh</H2>
 
-To compile you need a file called <A HREF="MyConfig">MyConfig</A>.
-In it you need to set a few things like the compiler you use or where
+To compile you may need to edit the <b>MyConfig</b> file (that you set up
+above).
+In it you can set a few things like the compiler you use or where
 certain libraries are located. The file linked here is an example that
 works on Debian.
 Among other things it has the section:
