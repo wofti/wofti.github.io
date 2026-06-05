@@ -38,9 +38,13 @@ git repos of the FAU NR group, type:
 <PRE>
 cp nmesh/configs/Debian-DNSdata/MyConfig nmesh
 </PRE>
+<P>
+Of course the bigger configuration will only work if you actually have
+access to the non-public FAU NR group repos.
 
 <P>
-After choosing your <b>MyConfig</b>, type:
+After choosing your <b>MyConfig</b>, download the modules specified
+in it by typing:
 <PRE>
 cd nmesh
 make git_clone
@@ -50,7 +54,7 @@ make git_clone
 <HR>
 <H2>Compiling Nmesh</H2>
 
-To compile you may need to edit the <b>MyConfig</b> file (that you set up
+To compile you may need to edit the <b>MyConfig</b> file (that you obtained
 above).
 In it you can set a few things like the compiler you use, or where
 certain libraries are located. The MyConfig files from above are examples
