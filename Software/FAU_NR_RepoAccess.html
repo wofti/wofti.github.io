@@ -27,6 +27,7 @@ one key for our repos!
 The only complication is that the server (quark.physics.fau.edu) is behind a
 firewall and thus can only be accessed via VPN.
 
+<HR>
 
 <H3>Steps to set up VPN access to the FAU academic network</H3>
 <ul>
@@ -43,6 +44,8 @@ QR code on
 to set up your authenticator app for connections to FAU.
 This will set up a One-Time-Password generator named 'Florida Atlantic
 University, Research Computing'.
+[Note, this generator is different from the one used to e.g. get into
+the FAU E-mail.]
 </li>
 
 <li>
@@ -119,6 +122,8 @@ needed to get through the FAU firewall.
 </li>
 </ul>
 
+<HR>
+
 <H3>Using ssh and git</H3>
 
 Once the VPN connection is established, you should test if ssh is set up
@@ -135,20 +140,21 @@ git clone giter@quark.physics.fau.edu:name_of_repo
 
 <HR>
 
-Note that whenever you make a connection, computers such as
-quark.physics.fau.edu will need your key. To access the
+Note that whenever you make a connection to computers such as
+quark.physics.fau.edu you will need your ssh key. To access this
 key your key-passphrase is needed. If you want to type this passphrase less
 often, you can set up
 <A HREF="https://en.wikipedia.org/wiki/Ssh-agent">ssh-agent</A>
 or a similar program.
 
-The
-<a href="https://github.com/wofti/WTscripts">add-key.py script</a>
-can also be used for this purpose.
-
 For more info on ssh keys and agents see
 <A HREF="ssh.html">ssh.html</A>.
 
+<!--
+The
+<a href="https://github.com/wofti/WTscripts">add-key.py script</a>
+can also be used for this purpose.
+-->
 
 </BODY>
 <HTML>
