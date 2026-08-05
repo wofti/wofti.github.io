@@ -23,8 +23,46 @@ on any of your computers by simply copying them there. I.e. you need only
 one key for our repos!
 
 The only complication is that the server (quark.physics.fau.edu) is behind a
-firewall and thus can only be accessed via a bastion host
-(bast.hpc.fau.edu). Thus you need to add the following to your .ssh/config :
+firewall and thus can only be accessed via VPN.
+
+To use the VPN you need to follow these steps
+<ul>
+<li>
+Obtain an FAU ID (and password). All FAU members have this, but if you are
+not at FAU, you can get a FAU courtesy account by sending your name, email
+and birth date to to Wolfgang.
+</li>
+
+<li>
+Install an authenticator app like FreeOTP on your smartphone. Then scan the
+QR code on
+<A HREF="https://access.hpc.fau.edu">access.hpc.fau.edu</A>
+to set up your authenticator app for connections to the FAU VPN.
+</li>
+
+<li>
+Install OpenVPN on you computer.
+On Debian or similar system you can do this with
+<PRE>
+apt install network-manager-openvpn-gnome
+</PRE>
+</li>
+
+<li>
+Download the OpenVPN configuration file
+<A HREF="https://helpdesk.fau.edu/TDClient/2061/Portal/Shared/FileOpen?AttachmentID=2df6994f-ea72-4f12-b50d-47c903b6acb6&ItemID=163638&ItemComponent=26&IsInline=0">fau-oit-rc-vpn.ovpn</A>.
+and save it.
+</li>
+
+</ul>
+
+
+
+
+<HR>
+
+
+OLD INFO: add the following to your .ssh/config :
 <PRE>
 Host bast-giter
    Hostname bast.hpc.fau.edu
