@@ -21,11 +21,30 @@ type:
 <PRE>
 git clone https://github.com/nmeshsource/nmesh.git
 </PRE>
-Copy the file <A HREF="MyConfig">MyConfig</A> into the newly created nmesh
-directory.
+
+Read the newly cloned file <b>nmesh/doc/nmesh.txt</b> to better
+understand how nmesh works.
+You will learn that what modules are downloaded and compiled, is specified
+in a file called <b>MyConfig</b>.
+<P>
+
+For a minimal configuration, copy this
+<A HREF="MyConfig">MyConfig</A>
+file into the newly created nmesh directory.
+<P>
+
+For a bigger configuration example, using some modules from the non-public
+git repos of the FAU NR group, type:
+<PRE>
+cp nmesh/configs/Debian-DNSdata/MyConfig nmesh
+</PRE>
+<P>
+Of course the bigger configuration will only work if you actually have
+access to the non-public FAU NR group repos.
 
 <P>
-Type:
+After choosing your <b>MyConfig</b>, download the modules specified
+in it by entering:
 <PRE>
 cd nmesh
 make git_clone
@@ -35,11 +54,12 @@ make git_clone
 <HR>
 <H2>Compiling Nmesh</H2>
 
-To compile you need a file called <A HREF="MyConfig">MyConfig</A>.
-In it you need to set a few things like the compiler you use or where
-certain libraries are located. The file linked here is an example that
-works on Debian.
-Among other things it has the section:
+To compile you may need to edit the <b>MyConfig</b> file (that you obtained
+above).
+In it you can set a few things like the compiler you use, or where
+certain libraries are located. The MyConfig files from above are examples
+that work on Debian.
+Among other things the <b>MyConfig</b> has the section:
 <PRE>
 #SPECIALLIBS += -lgsl -lgslcblas  # for GSL
 </PRE>
