@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<TITLE>FAU bastion host</TITLE>
+</HEAD>
+
+<!--
+<BODY BGCOLOR="#C0C0C0" TEXT="#000000">
+-->
+<BODY BGCOLOR="#000000" TEXT="#bba400"
+link="ccddff" vlink="cc0000" alink="ffffff">
+
+
+<A HREF="../index.html"><H1>Wolfgang Tichy</H1> </A>
+
+<HR>
+<H2>Access to the git repos of the FAU NR group via the bastion host</H2>
+
+The git repo server (quark.physics.fau.edu) is behind a
+firewall and can be accessed via a bastion host (bast.hpc.fau.edu).
+To make this work you need to add the following to your .ssh/config :
+<PRE>
+Host bast-giter
+   Hostname bast.hpc.fau.edu
+   User giter
+   IdentityFile  path_to_private_key_on_local_client
+
+Host quark.physics.fau.edu
+   IdentityFile  path_to_private_key_on_local_client
+   User giter
+   ProxyCommand ssh -W %h:%p  giter@bast-giter
+</PRE>
+
+
+</BODY>
+<HTML>
