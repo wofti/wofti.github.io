@@ -166,12 +166,21 @@ directly in the MyConfig. But on Athene you never know if a module sets up
 the environment variables that pkg-config needs, so that pkg-config may fail
 as well.
 
+If pkg-config does not work, you can try
+<PRE>
+echo $CMAKE_PREFIX_PATH
+</PRE>
+in order to learn where certain libraries are, as Athene's modules
+system sometimes adds useful path info there.
+
+<P>
+
 
 <H3>Last resort: set CPATH and LIBRARY_PATH</H3>
 
-Since the compiler ultimately reads the environment variables CPATH and
+Since the compiler also reads the environment variables CPATH and
 LIBRARY_PATH, you can add any include file or library file search path to
-them that you need. You can either do this in the shell before you type
+them that you need. You can either do this in the shell, before you type
 make, or you can even add it to your MyConfig (see e.g. the last 4 lines
 in this example
 <A HREF="https://github.com/nmeshsource/nmesh/blob/master/configs/FAUsAthene/MyConfig">MyConfig</A>).
