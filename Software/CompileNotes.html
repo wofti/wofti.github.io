@@ -140,20 +140,20 @@ gcc -I/usr/include -c file1.c
 </PRE>
 
 
-<H3>Compiling Sgrid, Nmesh or BAM</H3>
+<H3>Compiling Nmesh, Sgrid or BAM</H3>
 
-Both Sgrid and Nmesh and also BAM use GNU Make to issue the necessary
+Both Nmesh and Sgrid, and also BAM, use GNU Make to issue the necessary
 compiler commands. Thus in principle it suffices to just use make to
 compile these programs, e.g. we can simply type:
 <PRE>
-cd sgrid
+cd nmesh
 make
 </PRE>
 
-However, since Sgrid needs certain libraries, the compiler often needs to be
-given various arguments to find these libraries and their include files, i.e.
-the -L and -I arguments. And of course it also needs the various -l
-arguments to tell it which libraries we want to link in.
+However, since Nmesh and Sgrid need certain libraries, the compiler often
+needs to be given various arguments to find these libraries and their include
+files, i.e. the -L and -I arguments. And of course it also needs the various
+-l arguments to tell it which libraries we want to link in.
 
 To keep this reasonably simple, all 3 programs contain a MyConfig file that
 sets a couple of variables that are passed on to the compiler.
@@ -170,7 +170,7 @@ link in the libraries gsl and gslcblas and to look for them in
 
 <P>
 
-In Sgrid the above 2 lines are usually accompanied by
+In Sgrid the above 2 lines are usually also accompanied by
 <PRE>
 DFLAGS += -DGSL
 </PRE>
